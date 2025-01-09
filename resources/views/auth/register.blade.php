@@ -54,7 +54,7 @@
                             </x-form-field>
 
                             <x-form-field>
-                                <x-form-label for="email">Email</x-form-label>
+                                <x-form-label for="email">Email Address</x-form-label>
 
                                 <div>
                                     <x-form-input name="email" id="email" type="email" required />
@@ -83,7 +83,13 @@
                                 </div>
                             </x-form-field>
                             <x-form-field>
-                                <x-form-checkout></x-form-checkout>
+                                <div class="flex items-center">
+                                    <x-form-checkout id="terms" name="terms" />
+                                    <label for="terms" class="ms-2 text-xs text-gray-900 dark:text-gray-400">
+                                        I agree with the <a href="#" class="text-black font-bold hover:underline">Terms and Conditions</a>.
+                                    </label>
+                                </div>
+
                             </x-form-field>
                         </div>
                     </div>
