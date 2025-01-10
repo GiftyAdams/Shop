@@ -10,7 +10,7 @@
             <div class="w-full max-w-md p-8">
                 <div class="mb-4">
                     <ul class="space-y-1">
-                        <li class=" font-bold text-3xl">
+                        <li class=" font-bold text-2xl">
                             Welcome 👋
                         </li>
                         <li class="text-xs text-subHeader">
@@ -69,7 +69,7 @@
                                         <p>
                                             Don't have an account?
                                         </p>
-                                        <a href="/login" class="text-blue-500 hover:underline text-sm ml-1">Signup</a>
+                                        <a href="/register" class="text-blue-500 hover:underline text-sm ml-1">Signup</a>
                                     </div>
                                 </x-form-field>
                             </div>

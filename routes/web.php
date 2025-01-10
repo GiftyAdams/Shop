@@ -10,3 +10,5 @@ Route::view('/', 'welcome');
 Route::get('/register', [RegisteredUserController::class, 'create']);
 
 Route::get('/login', [SessionController::class, 'create']);
+
+Route::view('/reset', 'reset');
