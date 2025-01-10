@@ -22,7 +22,7 @@
                     <li class=" font-bold text-xl">
                         Create New Account
                     </li>
-                    <li class="text-xs text-slate-400">
+                    <li class="text-xs text-subHeader">
                         Please enter details
                     </li>
                 </ul>
@@ -32,7 +32,7 @@
 
                 <div>
                     <div>
-                        <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 justify-center">
+                        <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 w-80 justify-center">
                             <x-form-field>
                                 <x-form-label for="first_name">First Name</x-form-label>
 
@@ -91,13 +91,22 @@
                                 </div>
 
                             </x-form-field>
+                            <x-form-field>
+                                <x-form-button>Signup</x-form-button>
+                            </x-form-field>
+                            <x-form-field>
+                                <div class="center justify-center">
+                                    <p>
+                                        Have an account?
+                                    </p>
+                                    <a href="/login" class="text-blue-500 hover:underline text-sm ml-1">Login</a>
+                                </div>
+                            </x-form-field>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <x-form-button>Signup</x-form-button>
-                </div>
+
             </form>
         </div>
     </div>
