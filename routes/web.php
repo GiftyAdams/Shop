@@ -12,3 +12,5 @@ Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::get('/login', [SessionController::class, 'create']);
 
 Route::view('/reset', 'reset');
+Route::view('/otp', 'otp');
+Route::view('/error', 'error');
