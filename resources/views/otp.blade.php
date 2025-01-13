@@ -50,7 +50,7 @@
                         </x-form-field>
 
                         <x-form-field>
-                            <x-form-button class="mt-4">Send OTP</x-form-button>
+                        <x-form-button id="open-modal-button">Verify</x-form-button>
                         </x-form-field>
                     </div>
 
