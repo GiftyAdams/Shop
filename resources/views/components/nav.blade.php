@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between space-x-8 px-8 mt-2 mb-3">
+<div class="flex items-center justify-between space-x-8 px-14 mt-2 mb-3" id="nav">
     <div class="flex items-center">
         <x-svg.logo />
         <span class="font-bold italic text-base">shopNow</span>

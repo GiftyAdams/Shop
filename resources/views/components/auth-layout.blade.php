@@ -8,14 +8,26 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
-<x-nav />
+<body class="h-full w-full">
+    <x-nav />
 
-<main>
-{{$slot}}
-</main>
-   
+    <main class="flex flex-col" id="main">
 
-<x-footer />
+        {{$slot}}
+    </main>
+
+
+    <x-footer />
 </body>
+<script>
+    // JavaScript code here
+    document.addEventListener('DOMContentLoaded', function() {
+        const footer = document.getElementById('footer');
+        const main = document.getElementById('main');
+        const nav = document.getElementById('nav');
+
+        main.style.minHeight = `calc(97vh - ${footer.offsetHeight}px - ${nav.offsetHeight}px)`;
+    });
+</script>
+
 </html>
