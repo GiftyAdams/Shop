@@ -26,7 +26,7 @@
         const main = document.getElementById('main');
         const nav = document.getElementById('nav');
 
-        main.style.minHeight = `calc(97vh - ${footer.offsetHeight}px - ${nav.offsetHeight}px)`;
+        main.style.minHeight = `calc(98vh - ${footer.offsetHeight}px - ${nav.offsetHeight}px)`;
     });
 </script>
 
