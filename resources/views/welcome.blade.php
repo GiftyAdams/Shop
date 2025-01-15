@@ -1,79 +1,48 @@
 <x-auth-layout>
     <div style="background-image: url('/images/splash.jpg'); height: 95vh; background-size: cover; background-position: center;"
         class="flex items-center justify-end">
-        <div>
+        <div class="space-y-4">
+            <h1 class="text-black font-bold text-xl mr-20">
+                MEET OUR BESTSELLERS AND
+                SEE <br>-WHY OUR CUSTOMERS LOVE THEM
+            </h1>
             <div>
-                <h1 class="text-black font-bold text-xl">
-                    MEET OUR BESTSELLERS AND
-                    SEE <br>-WHY OUR CUSTOMERS LOVE THEM
-                </h1>
                 <x-form-button class="w-40 ">Shop Now →</x-form-button>
             </div>
         </div>
     </div>
 
     <div class="px-20">
-        <div class="flex justify-between items-center px-14 py-2">
-            <div>
-                <span class="text-xl font-medium">
-                    Latest Perfumes
-                </span>
-            </div>
-            <div class="space-x-2">
-                <x-form-button id="scroll-left" class="bg-slate-300 w-8">
-                    <x-svg.arrow-left />
-                </x-form-button>
-                <x-form-button id="scroll-right" class="w-8">
-                    <x-svg.arrow-right />
-                </x-form-button>
-            </div>
-        </div>
 
-        <!-- Horizontal Scrollable Image Row -->
-        <!-- <div class="overflow-y relative px-14">
-            <div id="image-container" class="flex space-x-4 transition-transform duration-300 scroll-auto">
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
-                <img src="{{ URL('images/2.png') }}" alt="Perfume 2" class="w-32 h-32 object-cover rounded-lg" />
-                <img src="{{ URL('images/3.jpg') }}" alt="Perfume 3" class="w-32 h-32 object-cover rounded-lg" />
-                <img src="{{ URL('images/4.jpg') }}" alt="Perfume 4" class="w-32 h-32 object-cover rounded-lg" />
-                <img src="{{ URL('images/5.jpg') }}" alt="Perfume 5" class="w-32 h-32 object-cover rounded-lg" />
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
-                <img src="{{ URL('images/2.png') }}" alt="Perfume 2" class="w-32 h-32 object-cover rounded-lg" />
-                <img src="{{ URL('images/3.jpg') }}" alt="Perfume 3" class="w-32 h-32 object-cover rounded-lg" />
-                <img src="{{ URL('images/4.jpg') }}" alt="Perfume 4" class="w-32 h-32 object-cover rounded-lg" />
-            </div>
-        </div> -->
-
-        <div>
+        <div class="center items-center space-x-4 justify-between py-12 ">
             <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
+                <img src="{{ URL('images/zara.png') }}" alt="Perfume 1" class="w-24 h-12 object-contain rounded-lg" />
             </div>
             <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
+                <img src="{{ URL('images/dior.png') }}" alt="Perfume 1" class="w-24 h-12 object-contain rounded-lg" />
             </div>
             <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
+                <img src="{{ URL('images/bvlgari.png') }}" alt="Perfume 1"
+                    class="w-24 h-12 object-contain  rounded-lg" />
             </div>
             <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
+                <img src="{{ URL('images/rabanne.png') }}" alt="Perfume 1"
+                    class="w-24 h-12 object-contain  rounded-lg" />
             </div>
             <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
+                <img src="{{ URL('images/fragrance.png') }}" alt="Perfume 1"
+                    class="w-24 h-12 object-contain  rounded-lg" />
             </div>
             <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
+                <img src="{{ URL('images/sauvage.png') }}" alt="Perfume 1"
+                    class="w-24 h-12 object-contain  rounded-lg" />
             </div>
             <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
+                <img src="{{ URL('images/boss.png') }}" alt="Perfume 1" class="w-24 h-12 object-contain  rounded-lg" />
             </div>
             <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
-            </div>
-            <div>
-                <img src="{{ URL('images/one.jpg') }}" alt="Perfume 1" class="w-32 h-32 object-cover rounded-lg" />
-            </div>
-            <div>
-
+                <img src="{{ URL('images/chanel.png') }}" alt="Perfume 1"
+                    class="w-24 h-12 object-contain  rounded-lg" />
             </div>
         </div>
 
