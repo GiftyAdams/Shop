@@ -33,7 +33,8 @@
                 <x-svg.cart />
             </li>
             <li>
-                <x-form-button class="w-24 mt-0 px-6 py-2">Login</x-form-button>
+              
+            <a href="/login">  <x-form-button class=" mt-0 w-20">Login</x-form-button></a>
             </li>
         </ul>
     </div>
