@@ -2,7 +2,7 @@
     <main class="h-screen flex">
         <!-- Left Section: Image -->
         <div class="w-3/5 h-screen bg-cover bg-center">
-            <img src="{{ Vite::asset('resources/images/login-image.jpg') }}" alt="" class="w-full h-full object-cover">
+            <img src="{{ Vite::asset('public/images/login-image.jpg') }}" alt="" class="w-full h-full object-cover">
         </div>
 
         <!-- Right Section: Form -->
@@ -18,7 +18,7 @@
                         </li>
                     </ul>
                 </div>
-                <form method="POST" action="/register">
+                <form method="POST" action="/login">
                     @csrf
 
                     <div>
@@ -30,7 +30,8 @@
                                     <x-form-label for="email">Email Address</x-form-label>
 
                                     <div>
-                                        <x-form-input name="email" id="email" type="email" required />
+                                        <x-form-input name="email" id="email" type="email" :value="old('email')"
+                                            equired />
 
                                         <x-form-error name="email" />
                                     </div>
@@ -47,7 +48,7 @@
                                 </x-form-field>
 
 
-                                <x-form-field>
+                                <!-- <x-form-field>
                                     <div class="center justify-between font-medium">
                                         <div class="center">
                                             <x-form-checkout />
@@ -60,16 +61,17 @@
                                         </a>
                                     </div>
 
-                                </x-form-field>
+                                </x-form-field> -->
                                 <x-form-field>
-                                    <x-form-button>Login</x-form-button>
+                                    <x-form-button class="w-80 mt-8">Login</x-form-button>
                                 </x-form-field>
                                 <x-form-field>
                                     <div class="center justify-center">
                                         <p>
                                             Don't have an account?
                                         </p>
-                                        <a href="/register" class="text-blue-500 hover:underline text-sm ml-1">Signup</a>
+                                        <a href="/register"
+                                            class="text-blue-500 hover:underline text-sm ml-1">Signup</a>
                                     </div>
                                 </x-form-field>
                             </div>

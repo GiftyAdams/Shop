@@ -19,6 +19,15 @@ p {
     @apply flex items-center;
 }
 
+.bold {
+    @apply font-bold;
+}
+.nav-button {
+    @apply w-24 mt-0 px-6 py-2;
+}
+.images {
+    @apply w-24 h-12 object-contain  rounded-lg
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

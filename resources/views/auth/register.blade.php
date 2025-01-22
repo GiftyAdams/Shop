@@ -2,7 +2,7 @@
     <main class="h-screen flex">
         <!-- Left Section: Image -->
         <div class="w-3/5 h-screen bg-cover bg-center">
-            <img src="{{ Vite::asset('resources/images/shopping.jpg') }}" alt="" class="w-full h-full object-cover">
+            <img src="{{ Vite::asset('public/images/shopping.jpg') }}" alt="" class="w-full h-full object-cover">
         </div>
 
         <!-- Right Section: Form -->
@@ -68,7 +68,8 @@
                                     <x-form-label for="password_confirmation">Confirm Password</x-form-label>
 
                                     <div>
-                                        <x-form-input name="password_confirmation" id="password_confirmation" type="password" required />
+                                        <x-form-input name="password_confirmation" id="password_confirmation"
+                                            type="password" required />
 
                                         <x-form-error name="password_confirmation" />
                                     </div>
@@ -77,20 +78,21 @@
                                     <div class="flex items-center">
                                         <x-form-checkout id="terms" name="terms" />
                                         <label for="terms" class="ms-2 text-xs text-gray-900 dark:text-gray-400">
-                                            I agree with the <a href="#" class="text-black font-bold hover:underline">Terms and Conditions</a>.
+                                            I agree with the <a href="#"
+                                                class="text-black font-bold hover:underline">Terms and Conditions</a>.
                                         </label>
                                     </div>
 
                                 </x-form-field>
                                 <x-form-field>
-                                    <x-form-button>Signup</x-form-button>
+                                    <x-form-button class="w-80">Signup</x-form-button>
                                 </x-form-field>
                                 <x-form-field>
                                     <div class="center justify-center">
                                         <p>
                                             Have an account?
                                         </p>
-                                        <a href="/login" class="text-blue-500 hover:underline text-sm ml-1">Login</a>
+                                        <a href="/login" class="text-blue-500  hover:underline text-sm ml-1">Login</a>
                                     </div>
                                 </x-form-field>
                             </div>
