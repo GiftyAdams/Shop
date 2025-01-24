@@ -1,0 +1,1 @@
+<img class="w-full rounded-xl" src="http://placehold.it/42/42" alt="" class="rounded-xl">

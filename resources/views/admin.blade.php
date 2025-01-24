@@ -12,13 +12,23 @@
         </div>
 
         <!-- Content -->
-        <div class="flex-1 bg-gray-100 p-6">
-            <h1 class="text-2xl font-bold mb-4 border px-2 py-4 bg-white">Products</h1>
-            <p class="text-gray-700">
-                This is the main content area. You can add anything you want here. The width automatically adjusts to
-                take up the remaining space after the sidenav.
-            </p>
+        <div class="flex-1 bg-gray-100 p-6 space-y-4">
+            <!-- Section 1 -->
+            <div class="bg-white border border-gray-300 rounded-md p-4 shadow-sm">
+                <h1 class="text-2xl font-bold mb-4">Poducts</h1>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="bg-white border border-gray-300 rounded-md p-4 shadow-sm">
+                <h2 class="text-xl font-semibold mb-2">Additional Section</h2>
+                <p class="text-gray-700">
+                    This is another section, neatly separated and styled with a white background and a border.
+                </p>
+            </div>
+
+
         </div>
+
     </div>
 
 </x-layout>

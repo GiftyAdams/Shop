@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tag;
-use App\Models\Product;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
 {
@@ -14,7 +12,6 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $tags = Tag::factory(6)->create();
-       Product::factoory(50)->hasAttached($tags)->create();
+        //
     }
 }

@@ -1,25 +1,102 @@
 <x-auth-layout>
-    <main class="px-20 py-4">
+    <main class="px-20 py-4 mx-auto">
 
         <div class=" grid grid-cols-4">
             <div class="col-span-1">
                 <div>
                     <div class="grid grid-rows-5 gap-4  rounded border border-black w-64 p-4 space-y-2 h-full">
-                        <div>
-                            <a href="#" class="flex items-center bold">
-                                <span>Product Categories</span>
-                            </a>
+                        <div class="space-y-4">
+                            <!-- Collapsible: Product Categories -->
+                            <x-collapsible title="Product Brand">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="rounded  text-indigo-600 ">
+                                    <span>Zara</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="rounded  text-indigo-600 ">
+                                    <span>Fragrance World</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="rounded  text-indigo-600 ">
+                                    <span>Dior</span>
+                                </label>
+                            </x-collapsible>
+                            <x-collapsible title="Product Categories">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="rounded  text-indigo-600 ">
+                                    <span>Men</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="rounded  text-indigo-600 ">
+                                    <span>Women</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="rounded  text-indigo-600 ">
+                                    <span>Unisex</span>
+                                </label>
+                            </x-collapsible>
+                            <div x-data="{ openPriceRange: false }"
+                                class="border border-gray-300 rounded-md p-4 bg-white">
+                                <!-- Collapsible Header -->
+                                <button class="flex items-center justify-between w-full text-left font-bold"
+                                    @click="openPriceRange = !openPriceRange">
+                                    <span>Price Range</span>
+                                    <svg :class="{ 'rotate-180': openPriceRange }"
+                                        class="w-5 h-5 transform transition-transform"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+
+                                <!-- Collapsible Content -->
+                                <div x-show="openPriceRange" class="mt-4 space-y-3" x-transition>
+                                    <!-- Minimum Price -->
+                                    <label class="flex flex-col space-y-1">
+                                        <span class="text-sm text-gray-700">Minimum Price</span>
+                                        <input type="number" placeholder="$¢0"
+                                            class="rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 w-full px-3 py-2 text-gray-900" />
+                                    </label>
+
+                                    <!-- Maximum Price -->
+                                    <label class="flex flex-col space-y-1">
+                                        <span class="text-sm text-gray-700">Maximum Price</span>
+                                        <input type="number" placeholder="$1000"
+                                            class="rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 w-full px-3 py-2 text-gray-900" />
+                                    </label>
+
+                                    <!-- Apply Button -->
+                                    <button
+                                        class="w-full bg-black text-white rounded-md py-2 focus:outline-none focus:ring focus:ring-white">
+                                        Apply
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+
+                            <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                const collapsibleSections = document.querySelectorAll("[data-collapsible]");
+
+                                collapsibleSections.forEach((section) => {
+                                    const button = section.querySelector("[data-toggle]");
+                                    const content = section.querySelector("[data-content]");
+
+                                    button.addEventListener("click", () => {
+                                        const isExpanded = button.getAttribute(
+                                            "aria-expanded") === "true";
+                                        button.setAttribute("aria-expanded", !isExpanded);
+                                        content.style.display = isExpanded ? "none" : "block";
+                                    });
+                                });
+                            });
+                            </script>
+
                         </div>
-                        <div>
-                            <a href="#" class="flex items-center  bold">
-                                <span>Filter by Price</span>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#" class="flex items-center bold">
-                                <span>Filter by Brand</span>
-                            </a>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -80,124 +157,23 @@
                     </script>
                 </div>
 
-                <div>
-                    @php
-                    $products = [
-                    [
-                    'imageUrl' => URL('images/one.jpg'),
-                    'title' => 'Pure Black Perfume',
-                    'description' => 'Sweet-scented fragrance',
-                    'price' => '$4.00',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/2.png'),
-                    'title' => 'Floral Essence',
-                    'description' => 'Fresh, flowery scent',
-                    'price' => '$5.50',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/3.jpg'),
-                    'title' => 'Citrus Breeze',
-                    'description' => 'Citrus-infused freshness',
-                    'price' => '$3.50',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/4.jpg'),
-                    'title' => 'Lavender Dream',
-                    'description' => 'Relaxing lavender aroma',
-                    'price' => '$6.00',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/5.jpg'),
-                    'title' => 'Ocean Mist',
-                    'description' => 'Refreshing ocean scent',
-                    'price' => '$4.50',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/one.jpg'),
-                    'title' => 'Spiced Wood',
-                    'description' => 'Warm and woody fragrance',
-                    'price' => '$7.00',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/2.png'),
-                    'title' => 'Tropical Paradise',
-                    'description' => 'Sweet tropical notes',
-                    'price' => '$5.00',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/3.jpg'),
-                    'title' => 'Berry Bliss',
-                    'description' => 'Fruity berry scent',
-                    'price' => '$3.75',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/4.jpg'),
-                    'title' => 'Woodland Escape',
-                    'description' => 'Earthy and fresh wood aroma',
-                    'price' => '$6.50',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/5.jpg'),
-                    'title' => 'Summer Citrus',
-                    'description' => 'Bright and citrusy fragrance',
-                    'price' => '$4.25',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/5.jpg'),
-                    'title' => 'Summer Citrus',
-                    'description' => 'Bright and citrusy fragrance',
-                    'price' => '$4.25',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/5.jpg'),
-                    'title' => 'Summer Citrus',
-                    'description' => 'Bright and citrusy fragrance',
-                    'price' => '$4.25',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/5.jpg'),
-                    'title' => 'Summer Citrus',
-                    'description' => 'Bright and citrusy fragrance',
-                    'price' => '$4.25',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/5.jpg'),
-                    'title' => 'Summer Citrus',
-                    'description' => 'Bright and citrusy fragrance',
-                    'price' => '$4.25',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    [
-                    'imageUrl' => URL('images/5.jpg'),
-                    'title' => 'Summer Citrus',
-                    'description' => 'Bright and citrusy fragrance',
-                    'price' => '$4.25',
-                    'tags'=>['black', 'perfume', 'scented'],
-                    ],
-                    ];
-                    @endphp
-                    <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 py-8">
-                        @foreach ($products as $product)
-                        <x-product-card :imageUrl="$product['imageUrl']" :title="$product['title']"
-                            :description="$product['description']" :price="$product['price']" />
-                        @endforeach
+                <div class="grid grid-cols-4 gap-4 py-4">
+                    <div>
+                        <x-product-card />
+                    </div>
+                    <div>
+                        <x-product-card />
+                    </div>
+                    <div>
+                        <x-product-card />
+                    </div>
+                    <div>
+                        <x-product-card />
                     </div>
                 </div>
+
             </div>
+
         </div>
         <x-pagination />
     </main>
