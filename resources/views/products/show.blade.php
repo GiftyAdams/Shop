@@ -4,7 +4,7 @@
         <div class=" grid grid-cols-4">
             <div class="col-span-1">
                 <div>
-                    <div class="grid grid-rows-5 gap-4  rounded border border-black w-64 p-4 space-y-2 h-full">
+                    <div class="grid grid-rows-5 gap-4  rounded border w-64 p-4 space-y-2 h-full">
                         <div class="space-y-4">
                             <!-- Collapsible: Product Categories -->
                             <x-collapsible title="Product Brand">
@@ -157,19 +157,11 @@
                     </script>
                 </div>
 
+                
                 <div class="grid grid-cols-4 gap-4 py-4">
-                    <div>
-                        <x-product-card />
-                    </div>
-                    <div>
-                        <x-product-card />
-                    </div>
-                    <div>
-                        <x-product-card />
-                    </div>
-                    <div>
-                        <x-product-card />
-                    </div>
+                    @foreach($products as $product)
+                        <x-product-card :$product />
+                    @endforeach
                 </div>
 
             </div>

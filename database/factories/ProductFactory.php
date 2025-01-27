@@ -19,10 +19,10 @@ class ProductFactory extends Factory
     {
         return [
             'admin_id' => Admin::factory(),
-            'name' => fake()->productName,
-            'description' => fake()->productDescription,
+            'name' => fake()->name,
+            'description' => fake()->text(),
             'price' => fake()->randomElement(['$5000', '$70000', '$60000']),
-            'category' => fake()->productCategory
+            'category' => fake()->text()
 
         ];
     }

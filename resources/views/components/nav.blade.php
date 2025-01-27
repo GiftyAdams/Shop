@@ -17,7 +17,7 @@
             </li>
 
             <li>
-                <a href="/" class="{{ request()->is('#') ? 'font-extrabold ' : 'font-medium' }} 
+                <a href="/contact" class="{{ request()->is('contact') ? 'font-extrabold ' : 'font-medium' }} 
               text-black rounded-md px-3 py-2 text-sm">
                     Contact Us
                 </a>
@@ -28,8 +28,18 @@
 
     <div>
         <ul class="center space-x-4">
-            <li>
-                <x-svg.search />
+            <li class="center">
+                {{-- <form action="#">
+                    <input type="text" placeholder="search">
+                </form>
+                <x-svg.search /> --}}
+                <form action="#" method="GET">
+                    <input :label="false" type="text" class="rounded-xl border px-2 outline-none" name="q" placeholder="Search" required>
+                    <button type="submit" aria-label="Search" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <x-svg.search />
+                    </button>
+                </form>
+                
             </li>
             <li>
                 <x-svg.heart />
