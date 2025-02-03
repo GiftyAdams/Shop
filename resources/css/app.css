@@ -19,6 +19,9 @@ p {
     @apply flex items-center;
 }
 
+.between {
+    @apply flex justify-between;
+}
 .bold {
     @apply font-bold;
 }

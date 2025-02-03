@@ -16,17 +16,30 @@ class ProductController extends Controller
             'tags' => Tag::all(),
         ]);
     }
-    public function show()
+    public function show(Product $product)
     {
         return view('products.show', [
             'products' => Product::all()->toArray(),
+            'products' => Product::paginate(8),
             'tags' => Tag::all(),
+
         ]);
     }
     public function wishlist()
     {
         return view('products.wishlist', [
             'products' => Product::all()->toArray(),
+            'tags' => Tag::all(),
+        ]);
+    }
+
+    public function detail($id, Product $product)
+    {
+        // $related_products = Product::where('category', $product->category)->get();
+        // dd($related_products);
+        return view('products.detail', [
+            'product' => $product->findOrFail($id),
+            'products' => $product->inRandomOrder()->limit(4)->get()->toArray(),
             'tags' => Tag::all(),
         ]);
     }

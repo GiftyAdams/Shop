@@ -22,7 +22,9 @@ class ProductFactory extends Factory
             'name' => fake()->name,
             'description' => fake()->text(),
             'price' => fake()->randomElement(['$5000', '$70000', '$60000']),
-            'category' => fake()->text()
+            'category' => fake()->text(),
+            'brand' => fake()->text(),
+            'image' => fake()->text(),
 
         ];
     }

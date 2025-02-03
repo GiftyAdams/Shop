@@ -1,13 +1,13 @@
 <x-layout>
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-1/5 bg-gray-800 p-4">
-            <h2 class="text-lg font-bold mb-4">Side Navigation</h2>
+        <div class="w-1/5  p-4">
+            <h2 class="text-lg font-bold mb-4"> <x-logo /></h2>
             <ul class="space-y-2">
-                <li><a href="#" class="block hover:bg-gray-700 rounded-md px-2 py-1">Dashboard</a></li>
-                <li><a href="#" class="block hover:bg-gray-700 rounded-md px-2 py-1">Products</a></li>
-                <li><a href="#" class="block hover:bg-gray-700 rounded-md px-2 py-1">Settings</a></li>
-                <li><a href="#" class="block hover:bg-gray-700 rounded-md px-2 py-1">Logout</a></li>
+                <li><a href="#" class="block  rounded-md px-2 py-1">Dashboard</a></li>
+                <li><a href="#" class="block  rounded-md px-2 py-1">Products</a></li>
+                <li><a href="#" class="block  rounded-md px-2 py-1">Settings</a></li>
+                <li><a href="#" class="block  rounded-md px-2 py-1">Logout</a></li>
             </ul>
         </div>
 
