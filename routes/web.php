@@ -15,7 +15,7 @@ Route::get('/search', [SearchController::class, 'index']);
 
 Route::get('/products', [ProductController::class, 'show']);
 Route::get('/wishlist', [ProductController::class, 'wishlist']);
-Route::get('/products/{id}', [ProductController::class, 'detail']);
+Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detail');
 
 Route::middleware('guest')->group(function () {
 Route::get('/register', [RegisteredUserController::class, 'create']);

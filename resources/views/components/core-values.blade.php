@@ -1,25 +1,22 @@
-<section class="py-8">
-    <div class="flex justify-center text-xl font-bold py">
-        Core Values
-    </div>
-    <div class="flex justify-center py-2">
-        <ul class="center space-x-10">
+<section class="py-8 mx-32">
+    <div>
+        <ul class="center between space-x-4">
             <li class="center">
-                <x-svg.wallet />
+                <x-svg.package />
                 <p>
-                    Flexible Payment
+                    Affordable Delivery
                 </p>
             </li>
             <li class="center">
-                <x-svg.wallet />
+                <x-svg.bank-notes />
                 <p>
-                    Flexible Payment
+                    Money Guarantee
                 </p>
             </li>
             <li class="center">
-                <x-svg.wallet />
+                <x-svg.headset />
                 <p>
-                    Flexible Payment
+                    Online Support
                 </p>
             </li>
             <li class="center">

@@ -19,8 +19,14 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('description');
             $table->string('brand');
+            $table->string('type');
+            $table->string('department');
+            $table->string('scent_note');
             $table->string('price');
+            $table->string('size');
             $table->string('category');
+            $table->string('quantity');
+            $table->string('stock');
             $table->timestamps();
         });
     }

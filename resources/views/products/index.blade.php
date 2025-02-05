@@ -45,13 +45,13 @@
 
 
 
-           <div class="grid grid-cols-4 gap-4">
+           <div class="grid grid-cols-3 gap-y-5 gap-x-4 mx-32 my-8">
             @foreach($products as $product)
             <x-product-card :$product />
             @endforeach
            </div>
             
-            <div class="grid grid-cols-4 gap-4 py-14 px-12">
+            <div class="grid grid-cols-4 gap-4 mb-10">
                 <div class="col-span-2 mt-20 space-y-4">
                     <h1 class="font-bold text-4xl italic"> New Arrivals Just For You </h1>
                     <h1> Discover this and many more products that will suit your taste.</h1>
@@ -64,7 +64,9 @@
                     <img src="{{ URL('images/login-image.jpg') }}" alt="" class="" />
                 </div>
             </div>
-
+            <div>
+                <x-core-values />
+            </div>
 
 
 

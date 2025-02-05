@@ -1,5 +1,5 @@
 <div class="flex items-center justify-between space-x-8 px-14 mt-2 mb-3" id="nav">
-    <x-logo />
+    <a href="/"> <x-logo /></a>
     <div>
         <ul class="center text-sm space-x-4">
             <li>
@@ -73,16 +73,19 @@
                 <button id="cartButton">
                     <x-svg.cart />
                 </button>
-                <div id="cartDropdown" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2 hidden">
+                <div id="cartDropdown" class="absolute bottom- 0 mt-20 w-48 bg-white shadow-lg rounded-lg p-2 hidden">
                     <p class="text-gray-700">Your cart is empty</p>
                     <a href="#">
-                    <button class="w-full text-left text-blue-500 mt-2">View Cart</button>
+                    <button class="w-full text-left text-blue-500 mt-2">Check Out</button>
                 </a>
                 </div>
             </li>
+            @auth
             <li class="center">
                 <a href="/profile"><x-svg.profile /></a>
             </li>
+            @endauth
+           
             
             <script>
                 document.addEventListener("DOMContentLoaded", function () {

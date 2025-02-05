@@ -21,11 +21,18 @@ class ProductFactory extends Factory
             'admin_id' => Admin::factory(),
             'name' => fake()->name,
             'description' => fake()->text(),
-            'price' => fake()->randomElement(['$5000', '$70000', '$60000']),
+            'price' => fake()->randomElement(['5000', '70000', '60000']),
             'category' => fake()->text(),
             'brand' => fake()->text(),
             'image' => fake()->text(),
+            'quantity' => fake()->text(),
+            'stock' => fake()->text(),
+            'type' => fake()->text(),
+            'department' => fake()->text(),
+            'scent_note' => fake()->text(),
+            'size' => fake()->text(),
 
         ];
+        
     }
 }
