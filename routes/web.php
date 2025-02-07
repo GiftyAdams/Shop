@@ -30,6 +30,9 @@ Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth'
 
 Route::view('/error', 'error');
 Route::view('/profile', 'profile');
+Route::view('/cart', "cart");
+// Route::post('/cart', "cart");
+Route::view('/checkout', 'checkout');
 // Route::view('/products', 'products');
 
 // Route::view('/detail', 'product-detail');
@@ -38,7 +41,7 @@ Route::view('/profile', 'profile');
 
 
 Route::view('/admin', 'admin');
-
+Route::view('/terms', 'terms');
 
 // Route::view('/reset', 'reset');
 // Route::view('/otp', 'otp');

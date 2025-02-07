@@ -73,10 +73,11 @@
                 <button id="cartButton">
                     <x-svg.cart />
                 </button>
-                <div id="cartDropdown" class="absolute bottom- 0 mt-20 w-48 bg-white shadow-lg rounded-lg p-2 hidden">
+                <div id="cartDropdown" class="absolute mt-24 w-48 bg-white shadow-lg rounded-lg p-2 hidden">
                     <p class="text-gray-700">Your cart is empty</p>
+                 
                     <a href="#">
-                    <button class="w-full text-left text-blue-500 mt-2">Check Out</button>
+                    <x-form-button class="w-full mt-4">Check Out</x-form-button>
                 </a>
                 </div>
             </li>

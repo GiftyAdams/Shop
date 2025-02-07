@@ -77,9 +77,9 @@
                                 <x-form-field>
                                     <div class="flex items-center">
                                         <x-form-checkout id="terms" name="terms" />
-                                        <label for="terms" class="ms-2 text-xs text-gray-900 dark:text-gray-400">
-                                            I agree with the <a href="#"
-                                                class="text-black font-bold hover:underline">Terms and Conditions</a>.
+                                        <label for="terms" class="ms-2 text-xs center justify-center">
+                                            I agree with the <a href="/terms"
+                                                class="text-blue-500  hover:underline text-sm ml-1">Terms and Conditions</a>.
                                         </label>
                                     </div>
 
