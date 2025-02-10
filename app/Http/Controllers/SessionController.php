@@ -26,6 +26,7 @@ class SessionController extends Controller
         'email' => 'Sorry, those credentials do not match.'
       ]);
     }
+  
 
     //regenerate the session token
     request()->session()->regenerate();

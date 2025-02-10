@@ -25,20 +25,20 @@
                         <div>
                             <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 w-80 justify-center">
                                 <x-form-field>
-                                    <x-form-label for="first_name">First Name</x-form-label>
+                                    <x-form-label for="first_name" >First Name</x-form-label>
 
                                     <div>
-                                        <x-form-input name="first_name" id="first_name" required />
+                                        <x-form-input value="{{ old('first_name') }}" name="first_name" id="first_name" required />
 
                                         <x-form-error name="first_name" />
                                     </div>
                                 </x-form-field>
 
                                 <x-form-field>
-                                    <x-form-label for="last_name">Last Name</x-form-label>
+                                    <x-form-label for="last_name" >Last Name</x-form-label>
 
                                     <div>
-                                        <x-form-input name="last_name" id="last_name" required />
+                                        <x-form-input name="last_name" id="last_name" value="{{ old('last_name') }}" required />
 
                                         <x-form-error name="last_name" />
                                     </div>
@@ -48,7 +48,7 @@
                                     <x-form-label for="email">Email Address</x-form-label>
 
                                     <div>
-                                        <x-form-input name="email" id="email" type="email" required />
+                                        <x-form-input name="email" id="email" type="email"  value="{{ old('email') }}" required />
 
                                         <x-form-error name="email" />
                                     </div>
@@ -74,19 +74,45 @@
                                         <x-form-error name="password_confirmation" />
                                     </div>
                                 </x-form-field>
+                                
+                                <!-- Terms and Conditions Checkbox -->
                                 <x-form-field>
                                     <div class="flex items-center">
-                                        <x-form-checkout id="terms" name="terms" />
+                                        <x-form-checkout id="terms" name="terms" value="accept" />
                                         <label for="terms" class="ms-2 text-xs center justify-center">
-                                            I agree with the <a href="/terms"
-                                                class="text-blue-500  hover:underline text-sm ml-1">Terms and Conditions</a>.
+                                            I agree with the
+                                            <a href="/terms" class="text-blue-500 hover:underline text-sm ml-1">Terms
+                                                and Conditions</a>.
                                         </label>
                                     </div>
+                                    <x-form-error name="terms" />
+                                </x-form-field>
 
-                                </x-form-field>
+                                <!-- Signup Button (Initially Disabled) -->
                                 <x-form-field>
-                                    <x-form-button class="w-80">Signup</x-form-button>
+                                    <x-form-button id="signup-btn" class="w-80 opacity-50 cursor-not-allowed" type="submit" disabled>
+                                        Signup
+                                    </x-form-button>
                                 </x-form-field>
+
+                                <!-- JavaScript -->
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        const termsCheckbox = document.getElementById("terms");
+                                        const signupButton = document.getElementById("signup-btn");
+
+                                        termsCheckbox.addEventListener("change", function() {
+                                            if (this.checked) {
+                                                signupButton.disabled = false;
+                                                signupButton.classList.remove("opacity-50", "cursor-not-allowed");
+                                            } else {
+                                                signupButton.disabled = true;
+                                                signupButton.classList.add("opacity-50", "cursor-not-allowed");
+                                            }
+                                        });
+                                    });
+                                </script>
+
                                 <x-form-field>
                                     <div class="center justify-center">
                                         <p>

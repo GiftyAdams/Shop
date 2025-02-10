@@ -46,7 +46,7 @@
                 </ol>
             </div> --}}
 
-            <div class="space-y-6 bg-gray-200 px-4 py-8 my-10">
+            <div class="space-y-6 bg-gray-200 px-4 py-8 my-6">
                 <div>
                     <x-header class="terms-header"> 1. General Terms</x-header>
                     <div class="px-4">
@@ -193,7 +193,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 text-sm">
+            <div class="mt-8 text-sm my-4">
                 <p>Last updated: February, 2025</p>
                 <p>Date of publication: 7th February, 2025.</p>
             </div>

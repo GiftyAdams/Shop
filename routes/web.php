@@ -1,13 +1,18 @@
 <?php
 
+use App\Http\Controllers\ForgotPasswordController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\RegisteredUserController;
 
+// Auth::routes(['verify' => true]);
 Route::view('/contact', 'contact');
+
 
 
 Route::get('/', [ProductController::class, 'index']);
@@ -18,14 +23,23 @@ Route::get('/wishlist', [ProductController::class, 'wishlist']);
 Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detail');
 
 Route::middleware('guest')->group(function () {
-Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('signup');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'create']);
+Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 });
 
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth');
+
+Route::view('/email/verify','auth.verify')->name('verification.notice');
+Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendOTP'])->name('password.email');
+
+
+Route::view('/reset', 'auth.reset');
 
 
 Route::view('/error', 'error');
@@ -43,5 +57,4 @@ Route::view('/checkout', 'checkout');
 Route::view('/admin', 'admin');
 Route::view('/terms', 'terms');
 
-// Route::view('/reset', 'reset');
 // Route::view('/otp', 'otp');

@@ -74,6 +74,13 @@
                                             class="text-blue-500 hover:underline text-sm ml-1">Signup</a>
                                     </div>
                                 </x-form-field>
+                                <x-form-field>
+                                    <div class="center justify-center"> 
+                                        <a href="/forgot-password">
+                                            <p class="text-blue-500 hover:underline text-sm ml-1">Forgot Password?</p>
+                                        </a>
+                                    </div>
+                                </x-form-field>
                             </div>
                         </div>
                     </div>
