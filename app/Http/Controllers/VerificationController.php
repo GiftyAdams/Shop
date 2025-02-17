@@ -17,6 +17,11 @@ class VerificationController extends Controller
         //login
         Auth::login($user);
         
+
+        // generate user token based on the id and store in session
+        // $token = base64_encode($user->id);
+        // $request->session()->put('user_token', $token);
+
         return redirect('/');
     }
 }

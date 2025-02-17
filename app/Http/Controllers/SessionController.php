@@ -31,6 +31,9 @@ class SessionController extends Controller
     //regenerate the session token
     request()->session()->regenerate();
 
+    // Generate user token and store in session
+    
+
     //redirect
     return redirect('/');
   }

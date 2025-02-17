@@ -24,7 +24,7 @@
                         </li>
                     </ul>
                 </div>
-                <form method="POST" action="/register">
+                <form method="POST" action="/forgot-password">
                     @csrf
 
                     <div class="grid grid-cols-1 gap-y-3 sm:grid-cols-2 w-80 justify-center">
@@ -39,7 +39,7 @@
                         </x-form-field>
 
                         <x-form-field>
-                            <x-form-button>Send OTP</x-form-button>
+                            <x-form-button class="w-80 mt-6" type="submit">Send OTP</x-form-button>
                         </x-form-field>
                     </div>
                 </form>

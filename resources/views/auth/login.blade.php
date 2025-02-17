@@ -1,8 +1,25 @@
 <x-layout>
+    @if (session('success'))
+        <div id="succcess-message" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const successMessage = document.getElementById("success-message");
+    if (successMessage) {
+        setTimeout(function() {
+            successMessage.style.display = "none";
+        }, 5000);
+    }
+})
+    </script>
     <main class="h-screen flex">
+
         <!-- Left Section: Image -->
         <div class="w-3/5 h-screen bg-cover bg-center">
-            <img src="{{ Vite::asset('public/images/login-image.jpg') }}" alt="" class="w-full h-full object-cover">
+            <img src="{{ Vite::asset('public/images/login-image.jpg') }}" alt=""
+                class="w-full h-full object-cover">
         </div>
 
         <!-- Right Section: Form -->
@@ -75,7 +92,7 @@
                                     </div>
                                 </x-form-field>
                                 <x-form-field>
-                                    <div class="center justify-center"> 
+                                    <div class="center justify-center">
                                         <a href="/forgot-password">
                                             <p class="text-blue-500 hover:underline text-sm ml-1">Forgot Password?</p>
                                         </a>

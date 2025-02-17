@@ -23,24 +23,27 @@ Route::get('/wishlist', [ProductController::class, 'wishlist']);
 Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detail');
 
 Route::middleware('guest')->group(function () {
-Route::get('/register', [RegisteredUserController::class, 'create'])->name('signup');
-Route::post('/register', [RegisteredUserController::class, 'store']);
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('signup');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'create'])->name('login');
-Route::post('/login', [SessionController::class, 'store']);
+    Route::get('/login', [SessionController::class, 'create'])->name('login');
+    Route::post('/login', [SessionController::class, 'store']);
 });
 
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth');
 
-Route::view('/email/verify','auth.verify')->name('verification.notice');
+Route::view('/email/verify', 'auth.verify')->name('verification.notice');
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendOTP'])->name('password.email');
 
+Route::view('/verify-otp', 'auth.verify-otp')->name('password.verify');
+Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOTP'])->name('password.verify.post');
 
-Route::view('/reset', 'auth.reset');
 
+Route::view('/reset-password', 'auth.reset-password')->name('password.reset.form');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
 
 Route::view('/error', 'error');
 Route::view('/profile', 'profile');
