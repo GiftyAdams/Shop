@@ -45,7 +45,7 @@
 
 
 
-           <div class="grid grid-cols-3 gap-y-5 gap-x-4 mx-32 my-8">
+           <div class="grid grid-cols-3 gap-y-6 gap-x-4 mx-32 my-10">
             @foreach($products as $product)
             <x-product-card :$product />
             @endforeach

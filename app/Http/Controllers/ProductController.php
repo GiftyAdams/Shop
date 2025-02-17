@@ -43,4 +43,7 @@ class ProductController extends Controller
             'tags' => Tag::all(),
         ]);
     }
+    public function contact() {
+        return view('products.contact');
+    }
 }

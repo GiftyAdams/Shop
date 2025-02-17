@@ -10,12 +10,9 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\RegisteredUserController;
 
-// Auth::routes(['verify' => true]);
-Route::view('/contact', 'contact');
-
-
 
 Route::get('/', [ProductController::class, 'index']);
+Route::get('/contact', [ProductController::class, 'contact']);
 Route::get('/search', [SearchController::class, 'index']);
 
 Route::get('/products', [ProductController::class, 'show']);
