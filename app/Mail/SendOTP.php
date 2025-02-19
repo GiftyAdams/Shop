@@ -35,7 +35,7 @@ class SendOTP extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send O T P',
+            subject: 'OTP Verification',
             from: 'shopnow@laracast.com',
         );
     }

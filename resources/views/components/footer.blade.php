@@ -33,7 +33,9 @@
                     <p> My Account</p>
                 </li>
                 <li>
-                    <p> Login</p>
+                 <a href="/login">
+                   <p> Login</p>
+                </a>
                 </li>
                 <li>
                     <p> My Cart</p>
@@ -65,7 +67,9 @@
                     <p>Privacy Policy</p>
                 </li>
                 <li>
-                    <p> Terms & Conditions</p>
+                    <a href="/terms">
+                        <p>Terms & Conditions</p>
+                    </a>
                 </li>
             </ul>
         </div>

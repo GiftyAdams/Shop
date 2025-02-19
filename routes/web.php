@@ -13,7 +13,9 @@ use App\Http\Controllers\RegisteredUserController;
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/contact', [ProductController::class, 'contact']);
-Route::get('/search', [SearchController::class, 'index']);
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+// Route::view('/search', 'search');
 
 Route::get('/products', [ProductController::class, 'show']);
 Route::get('/wishlist', [ProductController::class, 'wishlist']);
@@ -41,6 +43,8 @@ Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOTP'])->name
 
 Route::view('/reset-password', 'auth.reset-password')->name('password.reset.form');
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
+
+
 
 Route::view('/error', 'error');
 Route::view('/profile', 'profile');

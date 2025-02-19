@@ -7,9 +7,9 @@
                         <div>
                             <div class="space-y-4">
                                 <!-- Collapsible: Product Categories -->
-                              <p>
-                                Filter By
-                              </p>
+                                <p>
+                                    Filter By
+                                </p>
                                 <x-collapsible title="Gender">
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
@@ -194,17 +194,17 @@
                         });
                     </script>
                 </div>
-                <div class="grid grid-cols-3 gap-x-4 gap-y-5 py-4 ">
-                    @foreach ($products as $product)
-                        <x-product-card :$product />
-                    @endforeach
+                <div>
+                    <div class="grid grid-cols-3 gap-x-4 gap-y-5 py-4 ">
+                        @foreach ($products as $product)
+                            <x-product-card :$product />
+                        @endforeach
+                    </div>
                 </div>
-             
             </div>
         </div>
-        <div>
-            {{ $products->links() }}
         </div>
+
         <div class="mt-10">
             <x-core-values />
         </div>
