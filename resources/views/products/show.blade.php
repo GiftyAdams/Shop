@@ -195,6 +195,7 @@
                     </script>
                 </div>
                 <div>
+                    {{-- @dd(session()->all()) --}}
                     <div class="grid grid-cols-3 gap-x-4 gap-y-5 py-4 ">
                         @foreach ($products as $product)
                             <x-product-card :$product />
