@@ -86,17 +86,10 @@
                     <x-svg.heart />
                 </a>
             </li>
-            <li class="relative center">
-                <button id="cartButton">
+            <li>
+                <a href="/cart">
                     <x-svg.cart />
-                </button>
-                {{-- <div id="cartDropdown" class="absolute mt-24 w-48 bg-white shadow-lg rounded-lg p-2 hidden">
-                    <p class="text-gray-700">Your cart is empty</p>
-
-                    <a href="#">
-                        <x-form-button class="w-full mt-4">Check Out</x-form-button>
-                    </a>
-                </div> --}}
+                </a>
             </li>
             @auth
                 <li class="center">

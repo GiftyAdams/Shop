@@ -51,11 +51,14 @@
         }
     </script>
 
-
-    <button
-        class="z-50 absolute text-xs top-48 rounded-xl left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-        Add to Cart
-    </button>
+    <form action="{{ route('cart.add') }}" method="POST">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product['id'] }}">
+        <button type="submit"
+            class="z-50 absolute text-xs top-48 rounded-xl left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+            Add to Cart
+        </button>
+    </form>
     <div class="cursor-pointer" onclick="window.location.href = '{{ route('detail', ['id' => $product['id']]) }}'">
         <div class="relative group">
             <x-product-image class="w-full" />
@@ -69,7 +72,7 @@
             <div>
                 <ul>
                     <li>
-                        {{ $product['price'] }}
+                        ¢ {{ $product['price'] }}
                     </li>
                 </ul>
             </div>

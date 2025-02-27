@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\VerificationController;
@@ -19,8 +20,13 @@ Route::get('/contact', [ProductController::class, 'contact']);
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/products', [ProductController::class, 'show'])->name('show');
-Route::get('/wishlist', [ProductController::class, 'wishlist']);
+// Route::get('/wishlist', [ProductController::class, 'wishlist']);
 Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detail');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware('auth');
+Route::post('/cart/item', [CartController::class, 'updateQuantity'])->name('cart.update')->middleware('auth');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('signup');
@@ -41,20 +47,22 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'sendOTP'])->n
 Route::view('/verify-otp', 'auth.verify-otp')->name('password.verify');
 Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOTP'])->name('password.verify.post');
 
-
 Route::view('/reset-password', 'auth.reset-password')->name('password.reset.form');
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
 
 Route::get('/wishlist', [WishlistController::class, 'index']);
-Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add')->middleware('auth');
+Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
 Route::post('/wishlist/remove', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.remove')->middleware('auth');
+Route::get('/wishlist/login', [WishlistController::class, 'login'])->name('wishlist.login');
 
+Route::get('/profile',[ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
+Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
-Route::view('/error', 'error');
-Route::view('/profile', 'profile');
-// Route::view('/cart', "cart");
-// Route::post('/cart', "cart");
-Route::view('/checkout', 'checkout');
+Route::view('/settings', 'settings');
+// Route::view('/error', 'error');
+// Route::view('/profile', 'profile');
+
+// Route::view('/checkout', 'checkout');
 // Route::view('/products', 'products');
 
 // Route::view('/detail', 'product-detail');

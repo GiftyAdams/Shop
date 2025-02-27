@@ -22,11 +22,10 @@ return new class extends Migration
             $table->string('type');
             $table->string('department');
             $table->string('scent_note');
-            $table->string('price');
-            $table->string('size');
+            $table->float('price');
+            $table->unsignedBigInteger('size');
             $table->string('category');
-            $table->string('quantity');
-            $table->string('stock');
+            $table->integer('stock');
             $table->timestamps();
         });
     }

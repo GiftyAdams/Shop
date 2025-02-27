@@ -17,15 +17,23 @@ class WishlistController extends Controller
 
         return view('wishlist.index', compact('wishlistItems'));
     }
+//    public function login(Request $request)
+//    {
+//       // Check if the user is logged in
+//       if (!request()->user()) {
+//         return redirect('wishlist.login')->with('error', 'Please log in to access your wishlist.');
+//     }
+
     public function addToWishlist(Request $request)
     {
+      
         // Validation
         $request->validate([
             'product_id' => 'required|exists:products,id',
         ]);
 
 
-        $user_id = auth()->id();
+        $user_id = request()->user()->id;
         $product_id = $request->input('product_id');
 
         // Check if the product is already in the wishlist
@@ -50,18 +58,17 @@ class WishlistController extends Controller
     {
         $user_id = auth()->id();
         $product_id = $request->input('product_id');
-    
+
         // Check if the product is in the wishlist
         $wishlistItem = Wishlist::where('user_id', $user_id)
             ->where('product_id', $product_id)
             ->first();
-    
+
         if ($wishlistItem) {
             $wishlistItem->delete();
             return redirect()->back()->with('success', 'Product removed from wishlist successfully');
         }
-    
+
         return redirect()->back()->with('error', 'Product not found in wishlist');
     }
-
-}    
+}

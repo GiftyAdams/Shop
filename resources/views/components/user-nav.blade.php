@@ -1,4 +1,4 @@
-<div class=" rounded border w-64 space-y-2">
+<div class="rounded border w-64 space-y-2 sticky top-0">
     <ul class="grid grid-rows-5">
         <li>
             <a href="/profile"
@@ -33,7 +33,7 @@
             </a>
         </li>
         <li>
-            <a href="#"
+            <a href="/settings"
                 class="{{ request()->is('settings') ? 'bg-black text-white  ' : 'font-medium' }}
              side-nav">
                 <x-svg.setting />
