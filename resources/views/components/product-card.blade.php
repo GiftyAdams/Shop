@@ -51,14 +51,40 @@
         }
     </script>
 
-    <form action="{{ route('cart.add') }}" method="POST">
-        @csrf
-        <input type="hidden" name="product_id" value="{{ $product['id'] }}">
-        <button type="submit"
-            class="z-50 absolute text-xs top-48 rounded-xl left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-            Add to Cart
-        </button>
-    </form>
+<form action="{{ route('cart.add') }}" method="POST" class="add-to-cart" onsubmit="changeButtonText(event, this)">
+    @csrf
+    <input type="hidden" name="product_id" value="{{ $product['id'] }}">
+
+    @php
+        // Check if the product is already in the cart
+        $isInCart = \App\Models\CartItem::where('user_id', auth()->id())
+                    ->where('product_id', $product['id'])
+                    ->exists();
+    @endphp
+
+    <button type="submit"
+        class="z-50 absolute text-xs top-48 rounded-xl left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
+        {{ $isInCart ? 'disabled' : '' }}>
+        {{ $isInCart ? 'Added to Cart' : 'Add to Cart' }}
+    </button>
+</form>
+
+<script>
+function changeButtonText(event, form) {
+    event.preventDefault(); // Prevent the default form submission
+
+    let button = form.querySelector("button");
+    button.innerText = "Adding...";
+    button.disabled = true;
+
+    // Simulate a short delay before submitting the form
+    setTimeout(() => {
+        button.innerText = "Added to Cart";
+        form.submit(); // Submit the form
+    }, 1000);
+}
+</script>
+
     <div class="cursor-pointer" onclick="window.location.href = '{{ route('detail', ['id' => $product['id']]) }}'">
         <div class="relative group">
             <x-product-image class="w-full" />
@@ -78,5 +104,4 @@
             </div>
         </div>
     </div>
-
 </div>

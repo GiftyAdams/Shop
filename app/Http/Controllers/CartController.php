@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\CartItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class CartController extends Controller
@@ -19,7 +20,10 @@ class CartController extends Controller
     }
     public function addToCart(Request $request)
     {
-        // $quantity = (int) $request->input('quantity');
+     //check if user is logged in
+     if(!Auth::check()){
+        return redirect()->route('login');
+     }
 
         //validation
         $request->validate([

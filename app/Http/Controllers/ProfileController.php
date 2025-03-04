@@ -31,4 +31,12 @@ class ProfileController extends Controller
     //return to profile index
     return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
     }
+    public function settings()
+    {
+        return view('profile.settings');
+    }
+    public function orders()
+    {
+        return view('profile.orders');
+    }
 }

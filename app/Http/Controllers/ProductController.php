@@ -35,14 +35,13 @@ class ProductController extends Controller
 
     public function detail($id, Product $product)
     {
-        // $related_products = Product::where('category', $product->category)->get();
-        // dd($related_products);
         return view('products.detail', [
-            'product' => $product->findOrFail($id),
+            'product' => Product::with('images')->findOrFail($id), // Load images
             'products' => $product->inRandomOrder()->limit(4)->get()->toArray(),
             'tags' => Tag::all(),
         ]);
     }
+
     public function contact() {
         return view('products.contact');
     }

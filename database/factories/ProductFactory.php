@@ -24,7 +24,6 @@ class ProductFactory extends Factory
             'price' => fake()->randomFloat(2, 150, 300),
             'category' => fake()->text(),
             'brand' => fake()->text(),
-            'image' => fake()->text(),
             'stock' => fake()->randomDigit(),
             'type' => fake()->text(),
             'department' => fake()->text(),

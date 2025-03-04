@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ProductImage;
 
 class ProductSeeder extends Seeder
 {
@@ -14,7 +15,9 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $tags = Tag::factory(3)->create();
-        Product::factory(20)->hasAttached($tags)->create();
+        Product::factory(20)
+    ->has(ProductImage::factory(5), 'images') // Attach 5 images per product
+    ->hasAttached(Tag::factory(1))  // Attach 1 tags per product
+    ->create();
     }
 }

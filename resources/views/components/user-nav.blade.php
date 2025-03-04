@@ -9,8 +9,8 @@
             </a>
         </li>
         <li>
-            <a href="#"
-                class="{{ request()->is('orders') ? 'bg-black text-white  ' : 'font-medium' }}
+            <a href="/profile/orders"
+                class="{{ request()->is('profile/orders') ? 'bg-black text-white  ' : 'font-medium' }}
             side-nav">
                 <x-svg.shopping-bag />
                 <span>My Orders</span>
@@ -33,8 +33,8 @@
             </a>
         </li>
         <li>
-            <a href="/settings"
-                class="{{ request()->is('settings') ? 'bg-black text-white  ' : 'font-medium' }}
+            <a href="/profile/settings"
+                class="{{ request()->is('profile/settings') ? 'bg-black text-white  ' : 'font-medium' }}
              side-nav">
                 <x-svg.setting />
                 <span>Settings</span>

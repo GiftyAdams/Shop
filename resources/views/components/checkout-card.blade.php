@@ -1,4 +1,4 @@
-@props(['product'])
+{{-- @props(['product'])
 <div class="rounded border borber-transparent p-4">
     <div>
         <h1>CART SUMMARY</h1>
@@ -10,4 +10,4 @@
     <div>
         <p>Total</p>
     </div>
-</div>
+</div> --}}

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Admin::class);
             $table ->string('name');
-            $table->string('image')->nullable();
             $table->string('description');
             $table->string('brand');
             $table->string('type');

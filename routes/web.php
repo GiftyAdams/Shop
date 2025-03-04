@@ -57,8 +57,12 @@ Route::get('/wishlist/login', [WishlistController::class, 'login'])->name('wishl
 
 Route::get('/profile',[ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings')->middleware('auth');
+Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders')->middleware('auth');
 
-Route::view('/settings', 'settings');
+
+// Route::view('/settings', 'settings');
+// Route::view('/orders', 'orders');
 // Route::view('/error', 'error');
 // Route::view('/profile', 'profile');
 
@@ -70,7 +74,7 @@ Route::view('/settings', 'settings');
 
 
 
-Route::view('/admin', 'admin');
-Route::view('/terms', 'terms');
+// Route::view('/admin', 'admin');
+// Route::view('/terms', 'terms');
 
 // Route::view('/otp', 'otp');
