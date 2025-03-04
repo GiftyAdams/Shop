@@ -35,37 +35,38 @@
                             Size: {{ $product->size }}
                         </p>
                     </div>
-                   
+
                     <section class="flex p-12 space-x-4 mt-20">
-                        <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart" onsubmit="changeButtonText(event, this)">
+                        <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart"
+                            onsubmit="changeButtonText(event, this)">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product['id'] }}">
                             @php
-                            // Check if the product is already in the cart
-                            $isInCart = \App\Models\CartItem::where('user_id', auth()->id())
-                                        ->where('product_id', $product->id)
-                                        ->exists();
-                        @endphp
-                          <button type="submit"
-                          class="w-80 rounded-md px-8 py-3 text-[12px] text-white outline-none {{ $isInCart ? 'bg-gray-500' : 'bg-black' }}"
-                          {{ $isInCart ? 'disabled' : '' }}>
-                          {{ $isInCart ? 'Added to Cart' : 'Add to Cart' }}
+                                // Check if the product is already in the cart
+                                $isInCart = \App\Models\CartItem::where('user_id', auth()->id())
+                                    ->where('product_id', $product->id)
+                                    ->exists();
+                            @endphp
+                            <button type="submit"
+                                class="w-80 rounded-md px-8 py-3 text-[12px] text-white outline-none {{ $isInCart ? 'bg-gray-500' : 'bg-black' }}"
+                                {{ $isInCart ? 'disabled' : '' }}>
+                                {{ $isInCart ? 'Added to Cart' : 'Add to Cart' }}
                         </form>
                         <script>
                             function changeButtonText(event, form) {
                                 event.preventDefault(); // Stop form submission for now
-                            
+
                                 let button = form.querySelector("button");
                                 button.innerText = "Adding...";
                                 button.disabled = true;
-                            
+
                                 // Simulate form submission (remove this if you have AJAX handling)
                                 setTimeout(() => {
                                     button.innerText = "Added to Cart";
                                     form.submit(); // Now submit the form
                                 }, 1000);
                             }
-                            </script>
+                        </script>
                         @php
                             $isInWishlist = \App\Models\Wishlist::where('user_id', auth()->id())
                                 ->where('product_id', $product['id'])
@@ -93,13 +94,7 @@
                     </section>
                 </div>
             </div>
-            {{-- <div class="center">
-    <span>Description</span>
-    <span>
-        Additional Information
-    </span>
-  <span>Reviews</span>
-</div> --}}
+
             <div class="flex gap-4 font-bold cursor-pointer  my-4">
                 <span class="nav-link text-blue-500 border-b-2 border-blue-500 pb-1"
                     data-target="description">Description</span>
@@ -110,46 +105,33 @@
             <div id="content" class="max-w-2xl">
                 <!-- Description -->
                 <div id="description" class="content-section">
-                    <p>This is a detailed product description. It includes all the essential information about the
-                        product.</p>
+                <p>
+                    {{ $product->description }}
+                </p>
                 </div>
 
                 <!-- Reviews (With a Form) -->
                 <div id="reviews" class="content-section hidden">
                     <h2 class="text-xl font-semibold mb-2">Customer Reviews</h2>
                     <p class="text-gray-700 mb-4">See what others are saying about this product.</p>
-
-                    <!-- Review Form -->
-                    <form class=" p-4 rounded-lg space-y-2">
-                        <div class="center space-x-8">
-                            <div>
-                                <x-svg.star />
-                            </div>
-                            <div class="center">
-                                <x-svg.star />
-                                <x-svg.star />
-                            </div>
-                            <div class="center">
-                                <x-svg.star />
-                                <x-svg.star />
-                                <x-svg.star />
-                            </div>
-                            <div class="center">
-                                <x-svg.star />
-                                <x-svg.star />
-                                <x-svg.star />
-                                <x-svg.star />
-                            </div>
-                            <div class="center">
-                                <x-svg.star />
-                                <x-svg.star />
-                                <x-svg.star />
-                                <x-svg.star />
-                                <x-svg.star />
-                            </div>
+                    <div>
+                        @if ($reviews->isEmpty())
+                            <p class="text-gray-500">No reviews yet. Be the first to review this product!</p>
+                        @else
+                        @foreach ($reviews as $review)
+                        <div class="border p-4 rounded-lg mb-2">
+                            <p class="font-semibold">{{ $review->name }} ({{ $review->email }})</p>
+                            <p class="text-gray-700">{{ $review->review }}</p>
+                            <p class="text-xs text-gray-500">{{ $review->created_at->diffForHumans() }}</p>
                         </div>
+                    @endforeach
+                @endif
+                    </div>
+                    <!-- Review Form -->
+                    <form class="p-4 rounded-lg space-y-2" method="POST"
+                        action="{{ route('reviews.store', $product->id) }}">
+                        @csrf
                         <label class="block mb-2 font-semibold">Add Your Review</label>
-
                         <div>
                             <x-form-field>
                                 <x-form-label for="name">Name</x-form-label>

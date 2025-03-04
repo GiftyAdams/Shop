@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Tag;
 use App\Models\Admin;
 use App\Models\ProductImage;
+use App\Models\CustomerReview;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -31,5 +32,9 @@ class Product extends Model
     public function images()
     {
         return $this->hasmany(ProductImage::class);
+    }
+    public function reviews()
+    {
+        return $this->hasmany(CustomerReview::class);
     }
 }

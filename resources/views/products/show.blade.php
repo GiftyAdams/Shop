@@ -13,7 +13,51 @@
                                 <x-collapsible title="Gender">
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Men</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Women</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Unisex </span>
+                                    </label>
+                                </x-collapsible>
+                                <x-collapsible title="Category">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Parfum</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Eau de Parfum</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Eau de Toilette</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Eau de Cologne</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Eau Fraîche</span>
+                                    </label>
+                                </x-collapsible>
+                                <x-collapsible title="Brand">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
                                         <span>Zara</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Dior</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded  text-indigo-600 ">
+                                        <span>Bvlgari</span>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
@@ -21,68 +65,39 @@
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Dior</span>
-                                    </label>
-                                </x-collapsible>
-                                <x-collapsible title="Brand">
-                                    <label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Men</span>
+                                        <span>Bvlgari</span>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Women</span>
+                                        <span>Sauvage</span>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Unisex</span>
-                                    </label>
-                                </x-collapsible>
-                                <x-collapsible title="Type">
-                                    <label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Men</span>
+                                        <span>Channel</span>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Women</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Unisex</span>
-                                    </label>
-                                </x-collapsible>
-                                <x-collapsible title="Department">
-                                    <label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Men</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Women</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Unisex</span>
+                                        <span>Jean Paul Gaultier</span>
                                     </label>
                                 </x-collapsible>
                                 <x-collapsible title="Scent Notes">
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Men</span>
+                                        <span>Woody</span>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Women</span>
+                                        <span>Fruity</span>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Unisex</span>
+                                        <span>Aromatic </span>
                                     </label>
                                 </x-collapsible>
+
                                 <div x-data="{ openPriceRange: false }" class="border border-gray-300 rounded-md p-4 bg-white">
                                     <!-- Collapsible Header -->
-                                    <button class="flex items-center justify-between w-full text-left font-bold"
+                                    {{-- <button class="flex items-center justify-between w-full text-left font-bold"
                                         @click="openPriceRange = !openPriceRange">
                                         <span>Price Range</span>
                                         <svg :class="{ 'rotate-180': openPriceRange }"
@@ -92,7 +107,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 9l-7 7-7-7" />
                                         </svg>
-                                    </button>
+                                    </button> --}}
 
                                     <!-- Collapsible Content -->
                                     <div x-show="openPriceRange" class="mt-4 space-y-3" x-transition>

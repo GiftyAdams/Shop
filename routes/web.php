@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\CustomerReviewController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RegisteredUserController;
 
@@ -59,6 +60,8 @@ Route::get('/profile',[ProfileController::class, 'index'])->middleware('auth')->
 Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings')->middleware('auth');
 Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders')->middleware('auth');
+
+Route::post('/review/{product}', [CustomerReviewController::class, 'store'])->name('reviews.store');
 
 
 // Route::view('/settings', 'settings');

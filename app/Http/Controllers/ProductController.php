@@ -33,16 +33,31 @@ class ProductController extends Controller
         ]);
     }
 
-    public function detail($id, Product $product)
-    {
-        return view('products.detail', [
-            'product' => Product::with('images')->findOrFail($id), // Load images
-            'products' => $product->inRandomOrder()->limit(4)->get()->toArray(),
-            'tags' => Tag::all(),
-        ]);
-    }
+    // public function detail($id, Product $product)
+    // {
+    //     return view('products.detail', [
+    //         'product' => Product::with('images')->findOrFail($id), // Load images
+    //         'products' => $product->inRandomOrder()->limit(4)->get()->toArray(),
+    //         'tags' => Tag::all(),
+    //         'reviews'=>$product->reviews()->latest()->get(),
+    //     ]);
+    // }
+    public function detail($id)
+{
+    $product = Product::with(['images', 'reviews'])->findOrFail($id);
+
+    return view('products.detail', [
+        'product' => $product, // Correct product instance
+        'products' => Product::inRandomOrder()->limit(4)->get(), // Fetch random products
+        'tags' => Tag::all(),
+        'reviews' => $product->reviews()->latest()->get(), // Get latest reviews
+    ]);
+}
 
     public function contact() {
         return view('products.contact');
     }
+//     public function review() {
+
+//     }
 }
