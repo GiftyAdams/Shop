@@ -6,15 +6,31 @@
         @php
             $cartTotal = 0;
         @endphp
-    
-        <div class="space-y-4 mb-10">
-            @foreach ($cartItems as $cartItem)
-                <x-cart-product-card :product="$cartItem" :loopindex="$loop->index" />
-            @endforeach
-        </div>
-
-
-        <x-checkout-card />
+            <div class="space-y-4 mb-10">
+                @foreach ($cartItems as $cartItem)
+                    <x-cart-product-card :product="$cartItem" :loopindex="$loop->index" />
+                @endforeach
+            </div>
+            @php
+                foreach ($cartItems as $cartItem) {
+                    $cartTotal += $cartItem->product->price * $cartItem->quantity;
+                }
+            @endphp
+            <div class="flex justify-end">
+                <div>
+                <h2>
+                    Total: GHC
+                    {{-- <span class="cart-total"> {{ number_format($cartTotal, 2) }} </span> --}}
+                    <span class="cart-total">
+                        {{ is_numeric($cartTotal) ? number_format($cartTotal, 2) : '0.00' }}
+                    </span>
+                    
+                </h2>
+                <x-form-button>
+                    Checkout
+                </x-form-button>
+            </div>
+            </div>
     </main>
 
     <script>
@@ -31,6 +47,17 @@
             itemQuantity.textContent = newValue;
 
             updateDB(newValue, cart_item_id);
+
+            let cartTotal = document.querySelector('.cart-total');
+            let totalPriceOfCart = parseFloat(cartTotal.textContent);
+
+            if (change === -1 && currentValue > 1) {
+                cartTotal.textContent = totalPriceOfCart - price;
+            }
+            if (change === 1) {
+                cartTotal.textContent = totalPriceOfCart + price;
+            }
+
         }
 
         function updateDB(quantity, cart_item_id) {

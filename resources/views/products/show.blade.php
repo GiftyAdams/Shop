@@ -7,91 +7,91 @@
                         <div>
                             <div class="space-y-4">
                                 <!-- Collapsible: Product Categories -->
-                                <p>
+                                <p class="font-medium">
                                     Filter By
                                 </p>
                                 <x-collapsible title="Gender">
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Men</span>
+                                        <p>Men</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Women</span>
+                                        <p>Women</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Unisex </span>
+                                        <p>Unisex </p>
                                     </label>
                                 </x-collapsible>
                                 <x-collapsible title="Category">
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Parfum</span>
+                                        <p>Parfum</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Eau de Parfum</span>
+                                        <p>Eau de Parfum</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Eau de Toilette</span>
+                                        <p>Eau de Toilette</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Eau de Cologne</span>
+                                        <p>Eau de Cologne</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Eau Fraîche</span>
+                                        <p>Eau Fraîche</p>
                                     </label>
                                 </x-collapsible>
                                 <x-collapsible title="Brand">
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Zara</span>
+                                        <p>Zara</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Dior</span>
+                                        <p>Dior</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Bvlgari</span>
+                                        <p>Bvlgari</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Fragrance World</span>
+                                        <p>Fragrance World</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Bvlgari</span>
+                                        <p>Bvlgari</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Sauvage</span>
+                                        <p>Sauvage</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Channel</span>
+                                        <p>Channel</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Jean Paul Gaultier</span>
+                                        <p>Jean Paul Gaultier</p>
                                     </label>
                                 </x-collapsible>
                                 <x-collapsible title="Scent Notes">
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Woody</span>
+                                        <p>Woody</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Fruity</span>
+                                        <p>Fruity</p>
                                     </label>
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" class="rounded  text-indigo-600 ">
-                                        <span>Aromatic </span>
+                                        <p>Aromatic </p>
                                     </label>
                                 </x-collapsible>
 

@@ -1,8 +1,5 @@
 @props(['product', 'loopindex' => 0])
-<div>
-    
-</div>
-<div class=" rounded shadow border border-transparent relative group p-4 ">
+<div class="rounded shadow border border-transparent relative group p-4 ">
     <div class="flex justify-between">
         <div class="flex space-x-2">
             <div onclick="window.location.href = '{{ route('detail', ['id' => $product->product['id']]) }}'">
@@ -21,7 +18,7 @@
                         <span class="item-quantity-{{ $loopindex }}">{{ $product['quantity'] }}</span> x
                         {{ $product->product['price'] }}
                     </p>
-                    <p class="font-bold text-xl total-cal-{{ $loopindex }}">
+                    <p class="font-bold text-xl calculated-total total-cal-{{ $loopindex }}">
                         ¢ {{ (int) $product['quantity'] * (float) $product->product['price'] }}
                     </p>
                 </div>
@@ -46,4 +43,19 @@
         </div>
     </div>
 </div>
+{{-- <div class="flex justify-end">
+    <div>
+    <p>
+        Subtotal
+    </p>
+    <h2>
+        Total
+        
+    </h2>
+    <x-form-button>
+        Checkout
+    </x-form-button>
+</div>
+</div> --}}
+
 

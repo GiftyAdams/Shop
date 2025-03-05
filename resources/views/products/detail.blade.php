@@ -3,16 +3,32 @@
         <div>
             <div class="grid grid-cols-2 space-x-6">
                 <div>
-                    <!-- Main Product Image -->
-                    <x-product-image class="w-full h-[450px]" />
+                    <div>
+                        <!-- Main Product Image -->
+                        <img id="mainProductImage" src="{{ asset('storage/' . $product->images->first()->image_path) }}"
+                            class="w-full h-[450px] object-cover rounded-lg" />
 
-                    <!-- Other Product Images -->
-                    <div class="flex space-x-2 mt-4">
-                        @foreach ($product->images as $image)
-                            <x-product-image class="w-10 h-16 rounded" :image="$image" />
-                        @endforeach
+                        <!-- Other Product Images -->
+                        <div class="flex space-x-2 mt-4">
+                            @foreach ($product->images as $image)
+                                <img src="{{ asset('storage/' . $image->image_path) }}"
+                                    class="w-16 h-16 rounded cursor-pointer hover:opacity-75"
+                                    onclick="changeMainImage(this)" />
+                            @endforeach
+                        </div>
                     </div>
+
+                    <script>
+                        function changeMainImage(thumbnail) {
+                            // Get the main product image element
+                            let mainImage = document.getElementById("mainProductImage");
+
+                            // Change the main image src to the clicked thumbnail src
+                            mainImage.src = thumbnail.src;
+                        }
+                    </script>
                 </div>
+
                 <div>
                     <p class="text-xs mb-2">{{ $product->name }}</p>
                     <div class=" center between font-bold text-xl">
@@ -105,9 +121,9 @@
             <div id="content" class="max-w-2xl">
                 <!-- Description -->
                 <div id="description" class="content-section">
-                <p>
-                    {{ $product->description }}
-                </p>
+                    <p>
+                        {{ $product->description }}
+                    </p>
                 </div>
 
                 <!-- Reviews (With a Form) -->
@@ -118,14 +134,14 @@
                         @if ($reviews->isEmpty())
                             <p class="text-gray-500">No reviews yet. Be the first to review this product!</p>
                         @else
-                        @foreach ($reviews as $review)
-                        <div class="border p-4 rounded-lg mb-2">
-                            <p class="font-semibold">{{ $review->name }} ({{ $review->email }})</p>
-                            <p class="text-gray-700">{{ $review->review }}</p>
-                            <p class="text-xs text-gray-500">{{ $review->created_at->diffForHumans() }}</p>
-                        </div>
-                    @endforeach
-                @endif
+                            @foreach ($reviews as $review)
+                                <div class="border p-4 rounded-lg mb-2">
+                                    <p class="font-semibold">{{ $review->name }} ({{ $review->email }})</p>
+                                    <p class="text-gray-700">{{ $review->review }}</p>
+                                    <p class="text-xs text-gray-500">{{ $review->created_at->diffForHumans() }}</p>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                     <!-- Review Form -->
                     <form class="p-4 rounded-lg space-y-2" method="POST"

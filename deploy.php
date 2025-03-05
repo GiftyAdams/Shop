@@ -48,7 +48,7 @@ task('copy_env', function () {
 
 after('deploy:update_code', 'build');
 
-// after('deploy:update_code', 'copy_env');
+after('deploy:update_code', 'copy_env');
 before('deploy:symlink', 'artisan:migrate');
 
 after('deploy:failed', 'deploy:unlock');
