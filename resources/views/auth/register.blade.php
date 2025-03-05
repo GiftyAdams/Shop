@@ -2,7 +2,7 @@
     <main class="h-screen flex">
         <!-- Left Section: Image -->
         <div class="w-3/5 h-screen bg-cover bg-center">
-            <img src="{{ Vite::asset('public/images/shopping.jpg') }}" alt="" class="w-full h-full object-cover">
+            <img src="{{ asset('images/shopping.jpg') }}" alt="" class="w-full h-full object-cover">
         </div>
 
         <!-- Right Section: Form -->

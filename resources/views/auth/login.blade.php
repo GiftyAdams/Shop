@@ -18,7 +18,7 @@
 
         <!-- Left Section: Image -->
         <div class="w-3/5 h-screen bg-cover bg-center">
-            <img src="{{ asset('public/images/login-image.jpg') }}" alt=""
+            <img src="{{ asset('images/login-image.jpg') }}" alt=""
                 class="w-full h-full object-cover">
         </div>
 

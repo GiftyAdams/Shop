@@ -26,8 +26,8 @@
                     </a>
                 </li>
             </ul> --}}
-      
-            
+
+
         </div>
         <div>
             <h1>
@@ -37,21 +37,32 @@
                 Is the address you would like to use below? If not complete the form before to enter a new address.
             </p>
         </div>
-        <div class="border border-black rounded w-64 p-4 space-y-2">
+        <div class="border border-transparent rounded w-64 p-4  bg-gray-200">
             <span class="font-bold">
                 {{ Auth::user()->first_name }}
             </span>
-            <p>
-                @if (Auth::user()->address)
-                    {{ Auth::user()->address }}
-                @else
-                    <a href="{{ route('profile.edit') }}" class="text-red-500 underline">Update your profile to add an address</a>
-                @endif
-            </p>
-            
-            <button>
-                Edit
-            </button>
+            <div class="mt-3">
+                <p>
+                    @if (Auth::user()->address)
+                        {{ Auth::user()->address }}
+                    @else
+                        <a href="{{ route('profile.edit') }}" class="text-red-500 underline">Update your profile to add an
+                            address</a>
+                    @endif
+                </p>
+                <p>
+                    {{ Auth::user()->phone_number }}
+                </p>
+            </div>
+            <div class="flex justify-between mt-2">
+                <button>
+                    Edit
+                </button>
+                <button>
+                    <x-svg.trash />
+                </button>
+            </div>
+
         </div>
     </main>
 </x-auth-layout>

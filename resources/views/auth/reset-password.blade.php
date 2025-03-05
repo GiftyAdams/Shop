@@ -19,7 +19,7 @@
     <main class="h-screen flex">
         <!-- Left Section: Image -->
         <div class="w-3/5 h-screen bg-cover bg-center">
-            <img src="{{ Vite::asset('public/images/reset-image.jpg') }}" alt=""
+            <img src="{{ asset('images/reset-image.jpg') }}" alt=""
                 class="w-full h-full object-cover">
         </div>
 
