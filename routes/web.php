@@ -28,6 +28,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware('auth');
 Route::post('/cart/item', [CartController::class, 'updateQuantity'])->name('cart.update')->middleware('auth');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('signup');
@@ -62,6 +63,7 @@ Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('p
 Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders')->middleware('auth');
 
 Route::post('/review/{product}', [CustomerReviewController::class, 'store'])->name('reviews.store');
+
 
 
 // Route::view('/settings', 'settings');

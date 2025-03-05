@@ -6,31 +6,32 @@
         @php
             $cartTotal = 0;
         @endphp
-            <div class="space-y-4 mb-10">
-                @foreach ($cartItems as $cartItem)
-                    <x-cart-product-card :product="$cartItem" :loopindex="$loop->index" />
-                @endforeach
-            </div>
-            @php
-                foreach ($cartItems as $cartItem) {
-                    $cartTotal += $cartItem->product->price * $cartItem->quantity;
-                }
-            @endphp
+        <div class="space-y-4 mb-10">
+            @foreach ($cartItems as $cartItem)
+                <x-cart-product-card :product="$cartItem" :loopindex="$loop->index" />
+            @endforeach
+        </div>
+        @php
+            foreach ($cartItems as $cartItem) {
+                $cartTotal += $cartItem->product->price * $cartItem->quantity;
+            }
+        @endphp
+        @if ($cartItems->isNotEmpty())
             <div class="flex justify-end">
                 <div>
-                <h2>
-                    Total: GHC
-                    {{-- <span class="cart-total"> {{ number_format($cartTotal, 2) }} </span> --}}
-                    <span class="cart-total">
-                        {{ is_numeric($cartTotal) ? number_format($cartTotal, 2) : '0.00' }}
-                    </span>
-                    
-                </h2>
-                <x-form-button>
-                    Checkout
-                </x-form-button>
+                    <h2>
+                        Total: GHC
+                        <span class="cart-total">{{ $cartTotal }}</span>
+                    </h2>
+                    <form action="{{ route('cart.checkout') }}" method="POST">
+                        @csrf
+                        <x-form-button class="mt-4">
+                            Proceed to Checkout
+                        </x-form-button>
+                    </form>
+                </div>
             </div>
-            </div>
+        @endif
     </main>
 
     <script>
@@ -52,10 +53,10 @@
             let totalPriceOfCart = parseFloat(cartTotal.textContent);
 
             if (change === -1 && currentValue > 1) {
-                cartTotal.textContent = totalPriceOfCart - price;
+                cartTotal.textContent = (totalPriceOfCart - price).toFixed(2);
             }
             if (change === 1) {
-                cartTotal.textContent = totalPriceOfCart + price;
+                cartTotal.textContent = (totalPriceOfCart + price).toFixed(2);
             }
 
         }
