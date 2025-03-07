@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Product;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
@@ -20,10 +21,10 @@ class CartController extends Controller
     }
     public function addToCart(Request $request)
     {
-     //check if user is logged in
-     if(!Auth::check()){
-        return redirect()->route('login');
-     }
+        //check if user is logged in
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
 
         //validation
         $request->validate([
@@ -89,7 +90,7 @@ class CartController extends Controller
         $cartTotal = $this->cartTotal();
         return view('cart.index', compact('cartItems', 'cartTotal'));
     }
-   public function cartTotal()
+    public function cartTotal()
     {
         $cartItems = CartItem::where('user_id', auth()->id())->get();
         $total = 0;
@@ -98,10 +99,37 @@ class CartController extends Controller
         }
         return $total;
     }
-   public function checkout()
+    public function checkout()
     {
         $cartItems = CartItem::where('user_id', auth()->id())->get();
         $cartTotal = $this->cartTotal();
         return view('cart.checkout', compact('cartItems', 'cartTotal'));
+    }
+
+    public function addAddress(Request $request)
+    {
+        // Validate the form inputs
+        $request->validate([
+            'first_name'   => 'required|string|max:255',
+            'last_name'    => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
+            'address'      => 'required|string|max:255',
+        ]);
+
+        // Save the address to the database
+        $address = new Address();
+        $address->user_id = Auth::id(); // Associate with the logged-in user
+        $address->first_name = $request->first_name;
+        $address->last_name = $request->last_name;
+        $address->phone_number = $request->phone_number;
+        $address->address = $request->address;
+        $address->save();
+
+        // Redirect to the payment details page
+        return redirect()->route('cart.payment')->with('success', 'Address saved successfully!');
+    }
+    public function showPaymentPage()
+    {
+        return view('cart.payment');
     }
 }

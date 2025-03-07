@@ -2,67 +2,77 @@
     <main class="px-20 py-8">
         <x-header>Shipping Address</x-header>
 
-        <div>
-            {{-- <ul class="center flex justify-between">
-                <li>
-                    <a href="/cart/checkout"
-                        class="{{ request()->is('#') ? 'font-extrabold ' : 'font-medium' }} 
-                      text-black rounded-md px-3 py-2 text-sm"><x-svg.home />
-                        Address
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="{{ request()->is('/') ? 'font-extrabold ' : 'font-medium' }} 
-                      text-black rounded-md px-3 py-2 text-sm"><x-svg.wallet/>
-                        Payment Method
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="{{ request()->is('/') ? 'font-extrabold ' : 'font-medium' }} 
-                      text-black rounded-md px-3 py-2 text-sm"><x-svg.review/>
-                        Review
-                    </a>
-                </li>
-            </ul> --}}
-
-
-        </div>
-        <div>
-            <h1>
+        <div class="max-w-md mx-auto mt-4">
+            <h1 class="font-medium">
                 Select a delivery address
             </h1>
             <p>
-                Is the address you would like to use below? If not complete the form before to enter a new address.
+                Is the address you would like to use below? If not edit the form to enter a new address.
             </p>
         </div>
-        <div class="border border-transparent rounded w-64 p-4  bg-gray-200">
-            <span class="font-bold">
-                {{ Auth::user()->first_name }}
-            </span>
-            <div class="mt-3">
-                <p>
-                    @if (Auth::user()->address)
-                        {{ Auth::user()->address }}
-                    @else
-                        <a href="{{ route('profile.edit') }}" class="text-red-500 underline">Update your profile to add an
-                            address</a>
-                    @endif
-                </p>
-                <p>
-                    {{ Auth::user()->phone_number }}
-                </p>
-            </div>
-            <div class="flex justify-between mt-2">
-                <button>
-                    Edit
-                </button>
-                <button>
-                    <x-svg.trash />
-                </button>
-            </div>
 
+        <section>
+           
+            <div class="w-80 mx-auto ">
+                <p class="font-bold mt-4">
+                    Add Address
+                </p>
+                <form action="{{ route('cart.add.address') }}" method="POST">
+                    @csrf
+                    <div class="space-y-4 mt-3">
+                        <x-form-field>
+                            <x-form-label for="first_name">First Name</x-form-label>
+
+                            <div>
+                                <x-form-input class="py-3 editable" name="first_name" id="first_name"
+                                    value="{{ Auth::user()->first_name }}" />
+
+                                <x-form-error name="first_name" />
+                            </div>
+                        </x-form-field>
+                        <x-form-field>
+                            <x-form-label for="last_name">Last Name</x-form-label>
+
+                            <div>
+                                <x-form-input class="py-3 editable" name="last_name" id="last_name"
+                                    value="{{ Auth::user()->last_name }}" />
+
+                                <x-form-error name="last_name" />
+                            </div>
+                        </x-form-field>
+                        <x-form-field>
+                            <x-form-label for="phone_number">Phone Number</x-form-label>
+
+                            <div>
+                                <x-form-input class="py-3 editable" name="phone_number" placeholder="eg. 054 123 456"
+                                    id="phone_number" value="{{ Auth::user()->phone_number }}" />
+
+                                <x-form-error name="phone_number" />
+                            </div>
+                        </x-form-field>
+
+                        <x-form-field>
+                            <x-form-label for="address">Address</x-form-label>
+
+                            <div>
+                                <x-form-input class="py-3 editable" name="address" id="address" placeholder="Address"
+                                    value="{{ Auth::user()->address }}" />
+
+                                <x-form-error name="address" />
+                            </div>
+                        </x-form-field>
+
+                    </div>
+                    <div class="p-2 flex justify-center mt-3">
+                        <x-form-field>
+                            <x-form-button class="w-24 "
+                                type="submit">Save</x-form-button>
+                        </x-form-field>
+                    </div>
+                </form>
+            </div>
+        </section>
         </div>
+
     </main>
 </x-auth-layout>
