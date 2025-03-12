@@ -1,9 +1,12 @@
 <?php
 
+use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ProductController;
@@ -15,7 +18,6 @@ use App\Http\Controllers\CustomerReviewController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RegisteredUserController;
 
-
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/contact', [ProductController::class, 'contact']);
 
@@ -25,15 +27,23 @@ Route::get('/products', [ProductController::class, 'show'])->name('show');
 // Route::get('/wishlist', [ProductController::class, 'wishlist']);
 Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detail');
 
+
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware('auth');
 Route::post('/cart/item', [CartController::class, 'updateQuantity'])->name('cart.update')->middleware('auth');
 Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
-Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
-Route::post('cart/checkout/add-address', [CartController::class, 'addAddress'])->name('cart.add.address')->middleware('auth');
-Route::get('cart/checkout/payment', [CartController::class, 'showPaymentPage'])->name('cart.payment')->middleware('auth');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->middleware('auth');
 
+Route::post('/orders/place', [OrderController::class, 'placeOrder'])->name('orders.place');
+
+
+Route::get('cart/checkout/add-address', [CartController::class, 'addAddress'])->name('cart.add.address')->middleware('auth');
+Route::post('cart/checkout/add-address', [CartController::class, 'addAddress'])->middleware('auth');
+Route::get('cart/checkout/payment', [CartController::class, 'showPaymentPage'])->name('cart.payment')->middleware('auth');
+Route::get('cart/checkout/review', [CartController::class, 'showReviewPage'])->name('cart.review')->middleware('auth');
+
+// Route::post('/cart/checkout/review', [CartController::class, 'placeOrder'])->name('cart.place.order')->middleware('auth');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('signup');
@@ -65,7 +75,15 @@ Route::get('/wishlist/login', [WishlistController::class, 'login'])->name('wishl
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings')->middleware('auth');
-Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders')->middleware('auth');
+Route::get('/profile/address', [ProfileController::class, 'address'])->name('profile.address')->middleware('auth');
+
+
+
+Route::get('/profile/orders', [OrderController::class, 'index'])->middleware('auth');
+Route::post('/profile/orders', [OrderController::class, 'placeOrder'])->name('profile.orders')->middleware('auth');
+Route::get('/profile/orders/{order}', [OrderController::class, 'show'])->name('orders.show')->middleware('auth');
+Route::post('/profile/orders/{order}', [OrderController::class, 'cancel'])->name('profile.order.cancel')->middleware('auth');
+
 
 Route::post('/review/{product}', [CustomerReviewController::class, 'store'])->name('reviews.store');
 
@@ -83,8 +101,10 @@ Route::post('/review/{product}', [CustomerReviewController::class, 'store'])->na
 
 
 
-
-Route::view('/admin', 'admin');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('home');
+Route::get('/admin/orders', [AdminController::class, 'orders']);
+Route::get('/admin/show', [AdminController::class, 'show']);
+// Route::view('/admin', 'admin');
 // Route::view('/terms', 'terms');
 
 // Route::view('/otp', 'otp');

@@ -29,7 +29,7 @@ class SignedUser extends Mailable
     {
         return new Envelope(
             subject: 'SHOPNOW Account Verification',
-            from: 'shopnow@laracast.com',
+            from: '',
         );
     }
 

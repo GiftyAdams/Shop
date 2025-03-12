@@ -1,29 +1,33 @@
-<div class="border border-gray-200 rounded mt-2 p-2">
+
+<div class="border p-4 rounded-lg mb-4">
     <div class="flex justify-between">
         <div class="flex space-x-2">
             <div class="">
-                <x-product-image class="w-32 h-32" />
+                <x-product-image class="w-32 h-32 rounded" />
             </div>
             <div>
                 <a href="#", class ="font-medium text-2xl">
-                    Jane Davis
+                    {{ $order->product['name'] }} 
                 </a>
                 <p>
-                    Size: 50ml
+                    {{ $order->product['size'] }}
                 </p>
                 <p>
-                    Quantity: 1
+                    {{ $order->product['quantity'] }}
                 </p>
             </div>
         </div>
         <div>
             <p>
-                $60.98
+                {{ $order->product['price'] }}
             </p>
         </div>
         <div>
             <button class="border border-black rounded-md text-[12px]  px-6 py-2 text-center">
                 View Order
+            </button>
+            <button class="border border-black rounded-md text-[12px]  px-6 py-2 text-center">
+                Cancel
             </button>
         </div>
     </div>
@@ -33,4 +37,5 @@
             Your product has been delivered
         </p>
     </div>
+    
 </div>

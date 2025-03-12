@@ -36,7 +36,7 @@ class SendOTP extends Mailable
     {
         return new Envelope(
             subject: 'OTP Verification',
-            from: 'shopnow@laracast.com',
+            from: '',
         );
     }
 

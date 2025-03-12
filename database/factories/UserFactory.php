@@ -32,6 +32,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'address' => fake()->address(),
             'phone_number' => fake()->phoneNumber(),
+            'role' => 'user',
         ];
     }
 

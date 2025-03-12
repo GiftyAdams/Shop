@@ -25,8 +25,8 @@
             </a>
         </li>
         <li>
-            <a href="#"
-                class="{{ request()->is('address') ? 'bg-black text-white  ' : 'font-medium' }}
+            <a href="/profile/address"
+                class="{{ request()->is('profile/address') ? 'bg-black text-white  ' : 'font-medium' }}
              side-nav ">
                 <x-svg.location />
                 <span>Manage Address</span>

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Address;
 use App\Models\Product;
 use App\Models\CartItem;
+use App\Models\OrderItem;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -131,5 +134,13 @@ class CartController extends Controller
     public function showPaymentPage()
     {
         return view('cart.payment');
+    }
+    public function showReviewPage(Request $request)
+    {
+        $paymentMethod = $request->get('payment');
+        $address = auth()->user()->addresses()->latest()->first(); 
+        $cartItems = CartItem::where('user_id', auth()->id())->get();
+        $cartTotal = $this->cartTotal();  
+        return view('cart.review', compact('cartItems', 'cartTotal', 'address', 'paymentMethod'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,4 +40,14 @@ class ProfileController extends Controller
     {
         return view('profile.orders');
     }
+    public function address()
+    {
+        $user = Auth::user();
+    
+        // Fetch the latest order with its address
+        $order = Order::with('address')->where('user_id', $user->id)->latest()->first();
+    
+        return view('profile.address', compact('order'));
+    }
+    
 }
