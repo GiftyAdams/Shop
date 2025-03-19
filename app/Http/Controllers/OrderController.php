@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Address;
 use App\Models\CartItem;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
@@ -40,6 +41,7 @@ class OrderController extends Controller
     }
     public function placeOrder(Request $request)
     {
+
         $user = Auth::user();
         $cartItems = CartItem::where('user_id', $user->id)->get();
 
@@ -47,13 +49,21 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Your cart is empty.');
         }
 
+        // Get the most recent address entered by the user
+        $address = Address::where('user_id', $user->id)->latest()->first();
+
+        if (!$address) {
+            return redirect()->back()->with('error', 'Please add an address before placing an order.');
+        }
+
         //taking address input
-        $request->validate([
-            'address' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required',
-        ]);
+        // $request->validate([
+        //     'address' => 'required',
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'phone_number' => 'required',
+        // ]);
+
         // Calculate total price
         $totalPrice = $cartItems->sum(fn($item) => $item->product->price * $item->quantity);
 
@@ -65,7 +75,10 @@ class OrderController extends Controller
             'status' => 'pending'
         ]);
 
-   
+        // Link the address to the order
+        $address->order_id = $order->id;
+        $address->save();
+
         // Move Cart Items to Order Items
         foreach ($cartItems as $item) {
             OrderItem::create([
@@ -81,5 +94,26 @@ class OrderController extends Controller
 
         // Redirect to Orders Page
         return redirect()->route('profile.orders')->with('success', 'Order placed successfully!');
+    }
+    public function showorder(Order $order)
+    {
+        $orderItems = $order->orderItems()->with('product')->get();
+        return view('admin.showorder', compact('order', 'orderItems'));
+    }
+    public function updateStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,shipped,delivered,canceled',
+        ]);
+
+        $order->update(['status' => $request->status]);
+
+        return redirect()->route('admin.orders.show', $order->id)->with('success', 'Order status updated successfully.');
+    }
+    public function destroy(Order $order)
+    {
+        $order->delete(); // Delete the order
+
+        return redirect()->route('admin.dashboard')->with('success', 'Order deleted successfully.');
     }
 }

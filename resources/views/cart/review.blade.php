@@ -13,7 +13,7 @@
 
                     <div>
                         @foreach ($cartItems as $cartItem)
-                            <x-review-card :product="$cartItem" :loopindex="$loop->index" />
+                            <x-review-card :cartitem="$cartItem" :loopindex="$loop->index" />
                         @endforeach
                     </div>
                 </div>

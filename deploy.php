@@ -44,6 +44,7 @@ task('build', function () {
 desc('copy .env');
 task('copy_env', function () {
     run('cp {{deploy_path}}/.env {{deploy_path}}/shared/.env');
+    run('sudo chmod g+w {{deploy_path}}/database/database.sqlite');
 });
 
 after('deploy:update_code', 'build');

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\Brand;
+use App\Models\Gender;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -29,10 +32,13 @@ class SearchController extends Controller
     $query = $request->input('q');
     // dd($query);
     $products = Product::where('name', 'LIKE', "%{$query}%")->paginate(10);
+    $categories = Category::all();
+    $brands = Brand::all();
+    $genders = Gender::all();
 
     // dd($products); // Debugging: Check if data is retrieved
 
-    return view('search', compact('products', 'query'));
+    return view('search', compact('products', 'query', 'categories', 'brands', 'genders'));
 }
 
 }

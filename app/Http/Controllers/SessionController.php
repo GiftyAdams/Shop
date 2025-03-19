@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
@@ -31,15 +32,28 @@ class SessionController extends Controller
     //regenerate the session token
     request()->session()->regenerate();
 
-    // Generate user token and store in session
-    
+//if user is admin
+// if (Auth::check() && Auth::user()->role === 'admin') {
+//   return redirect('/admin/dashboard');
+// }
 
+   // Redirect based on role
+   return Auth::user()->isAdmin()
+   ? redirect('/admin/dashboard')
+   : redirect('/');
+   
     //redirect
     return redirect('/');
   }
-  public function destroy()
+  public function destroy(Request $request)
   {
     Auth::logout();
+    Session::flush(); 
+
+    // Prevent back button access
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
 
     return redirect('/');
   }

@@ -1,5 +1,5 @@
 <div class="rounded border w-64 space-y-2 sticky top-0">
-    <ul class="grid grid-rows-5">
+    <ul class="grid grid-rows-4 mb-8">
         <li>
             <a href="/profile"
                 class="{{ request()->is('profile') ? 'bg-black text-white  ' : 'font-medium' }}
@@ -32,13 +32,13 @@
                 <span>Manage Address</span>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="/profile/settings"
                 class="{{ request()->is('profile/settings') ? 'bg-black text-white  ' : 'font-medium' }}
              side-nav">
                 <x-svg.setting />
                 <span>Settings</span>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </div>

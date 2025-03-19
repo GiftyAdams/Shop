@@ -1,6 +1,9 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\Brand;
+use App\Models\Gender;
+use App\Models\Category;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,15 +18,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Admin::class);
+            $table->foreignIdFOr(Category::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFOr(Brand::class);
             $table ->string('name');
             $table->string('description');
-            $table->string('brand');
-            $table->string('type');
-            $table->string('department');
-            $table->string('scent_note');
+            $table->foreignIdFOr(Gender::class);
             $table->float('price');
             $table->unsignedBigInteger('size');
-            $table->string('category');
             $table->integer('stock');
             $table->timestamps();
         });

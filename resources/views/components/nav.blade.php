@@ -2,7 +2,7 @@
     <div>
         <a href="/"> <x-logo /></a>
     </div>
-    <div>
+    <div class="center">
         <ul class="center text-sm space-x-4">
             <li>
                 <a href="/"

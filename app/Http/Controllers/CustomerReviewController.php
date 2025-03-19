@@ -10,6 +10,9 @@ class CustomerReviewController extends Controller
 {
     public function store(Request $request, Product $product)
     {
+        if(!auth()->check()){
+            return back()->with('error', 'You must be logged in to submit a review.');
+        }
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -22,6 +25,7 @@ class CustomerReviewController extends Controller
             'email' => request('email'),
             'review' => request('review'),
         ]);
+        
         return redirect()->back()->with('success', 'Review submitted successfully.');
     }
 }

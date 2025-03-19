@@ -1,4 +1,4 @@
-@props(['width' => 'w-full', 'height' => ''])
-<img {{ $attributes->merge(['class' => "$width $height"]) }} 
-     src="https://picsum.photos/200" 
+@props(['width' => 'w-full', 'height' => '', 'imageurl'=> ''])
+<img {{ $attributes->merge(['class' => "$width $height "]) }} 
+     src="{{ $imageurl }}"
      alt="Image">

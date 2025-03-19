@@ -8,7 +8,7 @@
         @endphp
         <div class="space-y-4 mb-10">
             @foreach ($cartItems as $cartItem)
-                <x-cart-product-card :product="$cartItem" :loopindex="$loop->index" />
+                <x-cart-product-card :cartitem="$cartItem" :loopindex="$loop->index" />
             @endforeach
         </div>
         @php

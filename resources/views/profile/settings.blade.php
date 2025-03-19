@@ -1,4 +1,4 @@
-<x-auth-layout>
+{{-- <x-auth-layout>
     <main class="px-20">
         <div class="py-5">
             <x-header> My Profile</x-header>
@@ -21,4 +21,4 @@
                 <div class="border border-gray-200 mt-2"></div>
             </div>
     </main>
-</x-auth-layout>
+</x-auth-layout> --}}

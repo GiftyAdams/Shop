@@ -34,7 +34,7 @@ class ForgotPasswordController extends Controller
             'email' => $request->email
         ],[
             'otp' => $otp,
-            'expires_at' => now()->addMinutes(10)
+            'expires_at' => now()
         ]);
 
         //store email in session
@@ -98,9 +98,16 @@ class ForgotPasswordController extends Controller
             return back()->withErrors(['email' => 'User not found.']);
         }
 
-        // Update password
-        $user->update(['password' => bcrypt($request->password)]);
+        $saved = $user->update(['password' => bcrypt($request->password)]);
 
+        if (!$saved) {
+            return back()->withErrors(['password' => 'Failed to update password.']);
+        } else {
+            // Delete email from session
+            session()->forget('email');
+        }
+        // Redirect to login page
         return redirect()->route('login')->with('success', 'Password reset successfully.');
     }
 }
+// ->addMinutes(10)

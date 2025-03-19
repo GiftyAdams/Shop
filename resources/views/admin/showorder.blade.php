@@ -69,60 +69,53 @@
 
             <!-- Main Content Area -->
             <main class="flex-1 p-6 bg-white">
-                <h2 class="text-xl font-semibold mb-4">Orders</h2>
-                
-                        {{-- Table --}}
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full border-collapse border border-gray-300">
-                                <thead>
-                                    <tr class="bg-gray-200">
-                                        <th class="border border-gray-300 p-2">Customer Name</th>
-                                        <th class="border border-gray-300 p-2">Order Number</th>
-                                        <th class="border border-gray-300 p-2">Total Price</th>
-                                        <th class="border border-gray-300 p-2">Order Date</th>
-                                        <th class="border border-gray-300 p-2">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($orders as $order)
-                                        <tr class="text-center">
-                                            <td class="border border-gray-300 p-2">{{ $order->user->first_name}}</td>
-                                            <td class="border border-gray-300 p-2">
-                                                <a href="{{ route('admin.orders.show', $order->id) }}" class="text-blue-500 hover:underline">
-                                                    {{ $order->order_number ?? 'N/A' }}
-                                                </a>
-                                            </td>
-                                            </td>
-                                            <td class="border border-gray-300 p-2">{{ $order->total_price ?? 'N/A' }}
-                                            </td>
-                                            <td class="border border-gray-300 p-2">
-                                                {{ $order->created_at ? $order->created_at->format('Y-m-d') : 'N/A' }}
-                                            </td>
-                                            <td class="border border-gray-300 p-2">
-                                                <span
-                                                    class="px-2 py-1 rounded text-white 
-                                        {{ $order->status == 'pending' ? 'bg-yellow-500' : ($order->status == 'completed' ? 'bg-green-500' : 'bg-red-500') }}">
-                                                    {{ ucfirst($order->status) }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                <h1 class="text-2xl font-bold mb-4">Order #{{ $order->order_number }}</h1>
 
-                        </div>
-
-                        {{-- Pagination
-                        <div class="mt-4">
-                            {{ $products->links() }}
-                        </div> --}}
-                    </div>
-
+                <div class="mb-6">
+                    <p><strong>Customer:</strong> {{ $order->user?->name ?? 'Unknown' }}</p>
+                    <p><strong>Date:</strong> {{ $order->created_at->format('Y-m-d') }}</p>
+                    <p><strong>Total Price:</strong> ${{ number_format($order->total_price, 2) }}</p>
                 </div>
-
-            </main>
+            
+                <h2 class="text-xl font-bold mb-3">Order Items</h2>
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="border p-2">Product</th>
+                            <th class="border p-2">Quantity</th>
+                            <th class="border p-2">Price</th>
+                            <th class="border p-2">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($order->orderItems as $item)
+                            <tr class="text-center">
+                                <td class="border p-2">{{ $item->product?->name ?? 'n/a' }}</td>
+                                <td class="border p-2">{{ $item->quantity }}</td>
+                                <td class="border p-2">${{ number_format($item->price, 2) }}</td>
+                                <td class="border p-2">${{ number_format($item->quantity * $item->price, 2) }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            
+                <!-- Order Status Update Form -->
+                <h2 class="text-xl font-bold mt-6 mb-3">Update Order Status</h2>
+                <form method="POST" action="{{ route('orders.updateStatus', $order->id) }}">
+                    @csrf
+                    @method('PUT')
+                    <label class="block mb-2">Select Status:</label>
+                    <select name="status" class="w-full p-2 border rounded">
+                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                        <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                        <option value="canceled" {{ $order->status == 'canceled' ? 'selected' : '' }}>Canceled</option>
+                    </select>
+                    <button type="submit" class="mt-3 bg-blue-500 text-white px-4 py-2 rounded">Update Status</button>
+                </form>
+            
+                <div class="mt-4">
+                    <a href="{{ route('admin.orders') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Back to Orders</a>
+                </div>
         </div>
-    </div>
-
-
 </x-layout>

@@ -9,6 +9,17 @@
 </head>
 
 <body class="h-full w-full">
+    @if (session('success'))
+    <p id="successMessage" class="text-green-500 bg-green-100 border border-green-400 p-2 rounded text-center">
+        {{ session('success') }}
+    </p>
+@endif
+
+@if (session('error'))
+    <p id="errorMessage" class="text-red-500 bg-red-100 border border-red-400 p-2 rounded text-center">
+        {{ session('error') }}
+    </p>
+@endif
     <x-nav />
 
     <main class="flex flex-col" id="main">
@@ -28,6 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     main.style.minHeight = `calc(98vh - ${footer.offsetHeight}px - ${nav.offsetHeight}px)`;
 });
+    // Auto-hide messages after 3 seconds
+    setTimeout(() => {
+        document.getElementById('successMessage')?.remove();
+        document.getElementById('errorMessage')?.remove();
+    }, 5000);
 </script>
 
 </html>

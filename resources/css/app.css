@@ -40,6 +40,9 @@ p {
 .radio {
     @apply flex items-center space-x-1;
 }
+.summary {
+    @apply p-8 border border-transparent shadow-md rounded-md;
+;}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

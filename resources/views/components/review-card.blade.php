@@ -1,18 +1,18 @@
-@props(['product', 'loopindex' => 0])
+@props(['cartitem', 'loopindex' => 0])
 <div class="relative group py-2">
     <div class="flex space-x-2">
-        <div onclick="window.location.href = '{{ route('detail', ['id' => $product->product['id']]) }}'">
-            <x-product-image class="w-[60px] rounded-md" />
+        <div onclick="window.location.href = '{{ route('detail', ['id' => $cartitem->product['id']]) }}'">
+            <x-product-image :imageurl="asset($cartitem->product->images[0]->image_url)" class="w-[50px] rounded-md" />
         </div>
         <div class="space-y-8">
             <div>
-                <a href="#" class="self-start font-medium mb-2">{{ $product->product['name'] }}</a>
+                <a href="#" class="self-start font-medium mb-2">{{ $cartitem->product['name'] }}</a>
 
                 <p class="font-bold calculated-total total-cal-{{ $loopindex }}">
-                    ¢ {{ (int) $product['quantity'] * (float) $product->product['price'] }}
+                    ¢ {{ (int) $cartitem['quantity'] * (float) $cartitem->product['price'] }}
                 </p>
                 <p>
-                    Size:{{ $product->product['size'] }}
+                    Size:{{ $cartitem->product['size'] }}
                 </p>
             </div>
         </div>

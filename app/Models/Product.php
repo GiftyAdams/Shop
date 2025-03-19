@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Tag;
 use App\Models\Admin;
+use App\Models\Category;
 use App\Models\ProductImage;
 use App\Models\CustomerReview;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,7 @@ class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
+    protected $guarded =[];
 
     public function tag(string $name): void
     {
@@ -31,10 +33,14 @@ class Product extends Model
     }
     public function images()
     {
-        return $this->hasmany(ProductImage::class);
+        return $this->hasMany(ProductImage::class);
     }
     public function reviews()
     {
         return $this->hasmany(CustomerReview::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

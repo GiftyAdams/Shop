@@ -87,7 +87,7 @@ function changeButtonText(event, form) {
 
     <div class="cursor-pointer" onclick="window.location.href = '{{ route('detail', ['id' => $product['id']]) }}'">
         <div class="relative group">
-            <x-product-image class="w-full" />
+            <x-product-image :imageurl="asset($product->images[0]->image_url)" class="w-full" />
         </div>
 
         <div class="px-2 py-2">

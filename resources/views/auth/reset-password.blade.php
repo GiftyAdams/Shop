@@ -67,6 +67,7 @@
                         </x-form-field>
                     </div>
                 </form>
+                <x-form-error name="email" />
             </div>
         </div>
     </main>

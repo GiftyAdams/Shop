@@ -58,7 +58,7 @@
                 <li><a href="#"
                         class="text-white hover:text-black border border-transparent bg-blue-300 px-3 py-2 rounded text-xs">Admin</a>
                 </li>
-                {{-- <li><a href="#" class="text-gray-700 hover:text-black">Logout</a></li> --}}
+                <li><a href="#" class="text-gray-700 hover:text-black">Logout</a></li>
             </ul>
         </nav>
 
@@ -73,7 +73,6 @@
 
                 <div class="max-w-4xl mx-auto bg-white p-6 rounded-md shadow-md">
                     <h2 class="text-2xl font-semibold mb-4">Add New Product</h2>
-
                     <!-- Product Form -->
                     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -99,17 +98,16 @@
                                 </div>
                             </x-form-field>
                             <x-form-field>
-                                <x-form-label for="brand">Brand</x-form-label>
-
-                                <div>
-                                    <x-form-input name="brand" id="brand" type="brand"
-                                        value="{{ old('brand') }}" required />
-
-                                    <x-form-error name="brand" />
-                                </div>
+                                <label for="brand">Select a Brand:</label>
+                                <select name="brand_id" id="brand" class="border p-2 rounded">
+                                    <option value="">Choose a Brand </option>
+                                    @foreach($brands as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
                             </x-form-field>
 
-                            <x-form-field>
+                            {{-- <x-form-field>
                                 <x-form-label for="department">Department</x-form-label>
 
                                 <div>
@@ -118,9 +116,9 @@
 
                                     <x-form-error name="department" />
                                 </div>
-                            </x-form-field>
+                            </x-form-field> --}}
 
-                            <x-form-field>
+                            {{-- <x-form-field>
                                 <x-form-label for="scent_note">Scent Note</x-form-label>
 
                                 <div>
@@ -129,19 +127,37 @@
 
                                     <x-form-error name="scent_note" />
                                 </div>
-                            </x-form-field>
+                            </x-form-field> --}}
 
                             <x-form-field>
                                 <x-form-label for="price">Price</x-form-label>
 
                                 <div>
-                                    <x-form-input name="price" id="price" type="price"
+                                    <x-form-input name="price" id="price" type="number"  step="0.01" min="0"
                                         value="{{ old('price') }}" required />
 
                                     <x-form-error name="price" />
                                 </div>
                             </x-form-field>
+                            {{-- <x-form-field>
+                                <x-form-label for="type">Type</x-form-label>
 
+                                <div>
+                                    <x-form-input name="type" id="type" type="type"
+                                        value="{{ old('type') }}" required />
+
+                                    <x-form-error name="type" />
+                                </div>
+                            </x-form-field> --}}
+                            <x-form-field>
+                                <label for="category">Select Category:</label>
+                                <select name="category_id" id="category" class="border p-2 rounded">
+                                    <option value=""> Choose a Category </option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </x-form-field>
                             <x-form-field>
                                 <x-form-label for="size">Size (ml)</x-form-label>
 
@@ -153,7 +169,15 @@
                                 </div>
                             </x-form-field>
 
-
+                            <x-form-field>
+                                <label for="gender">Select Gender:</label>
+                                <select name="gender_id" id="gender" class="border p-2 rounded">
+                                    <option value=""> Choose a Gender </option>
+                                    @foreach($genders as $gender)
+                                        <option value="{{ $gender->id }}">{{ $gender->name }}</option>
+                                    @endforeach
+                                </select>
+                            </x-form-field>
                             <x-form-field>
                                 <x-form-label for="stock">Stock</x-form-label>
 
@@ -169,7 +193,7 @@
 
                             <x-form-field>
                                 <x-form-label for="stock">Product Images</x-form-label>
-                                <input type="file" name="images[]" multiple class="w-full p-2 border rounded">
+                                <input type="file" name="images[]" multiple class="w-full p-2 border rounded" required>
                             </x-form-field>
 
                             <div class="flex justify-end">
@@ -177,6 +201,9 @@
                         </div>
                         </div>
                     </form>
+                    @foreach ($errors->all() as $error)
+                        <p class="text-red-500 text-xs mt-2">{{ $error }}</p>
+                    @endforeach
                 </div>
 
 

@@ -5,13 +5,13 @@
                 <div>
                     <div>
                         <!-- Main Product Image -->
-                        <img id="mainProductImage" src="{{ asset('storage/' . $product->images->first()->image_path) }}"
+                        <img id="mainProductImage" src="{{ asset($product->images[0]->image_url) }}"
                             class="w-full h-[450px] object-cover rounded-lg" />
 
                         <!-- Other Product Images -->
                         <div class="flex space-x-2 mt-4">
                             @foreach ($product->images as $image)
-                                <img src="{{ asset('storage/' . $image->image_path) }}"
+                                <img src="{{ asset($product->images[$loop->index]->image_url) }}"
                                     class="w-16 h-16 rounded cursor-pointer hover:opacity-75"
                                     onclick="changeMainImage(this)" />
                             @endforeach
@@ -31,15 +31,20 @@
 
                 <div>
                     <p class="text-xs mb-2">{{ $product->name }}</p>
-                    <div class=" center between font-bold text-xl">
+                    <div class="center between font-bold text-xl">
                         <h1 class="text-3xl"> {{ $product->name }}</h1>
-                        <p class="bg-green-500 text-white text-xs px-2 py- rounded">In Stock</p>
+                        {{-- if item is in stock then show this if not show out of stock --}}
+                        @if ($product->quantity > 0)
+                            <p class="bg-green-500 text-white text-xs px-2 py- rounded">In Stock</p>
+                        @else
+                            <p class="bg-red-500 text-white text-xs px-2 py- rounded">Out of Stock</p>
+                        @endif
                     </div>
 
                     <div class="my-4 mt-8">
                         <div style="border-top: 1px solid black; width: 100%; margin: 10px 0;"></div>
 
-                        <span class="font-medium text-2xl space-y-3">${{ $product->price }}</span>
+                        <span class="font-medium text-2xl space-y-3">¢{{ $product->price }}</span>
                         <div style="border-bottom: 1px solid black; width: 100%; margin: 10px 0;"></div>
 
                     </div>
@@ -153,7 +158,8 @@
                                 <x-form-label for="name">Name</x-form-label>
 
                                 <div>
-                                    <x-form-input class="py-3" name="name" id="name" required />
+                                    <x-form-input class="py-3" name="name"
+                                        value="{{ auth()->user()->first_name ?? '' }}" id="name" required />
 
                                     <x-form-error name="name" />
                                 </div>
@@ -164,7 +170,8 @@
                                 <x-form-label for="email">Email Address</x-form-label>
 
                                 <div>
-                                    <x-form-input class="py-3" name="email" id="email" type="email"
+                                    <x-form-input class="py-3" name="email"
+                                        value="{{ auth()->user()->email ?? '' }}" id="email" type="email"
                                         required />
 
                                     <x-form-error name="email" />
@@ -185,6 +192,7 @@
                         <div class="mt-4">
                             <x-form-field>
                                 <x-form-button class="w-40 justify-items-end">Submit</x-form-button>
+                                {{-- <x-form-error name="success" /> --}}
                             </x-form-field>
                         </div>
                     </form>
@@ -224,6 +232,14 @@
             <div class="mt-10">
                 <x-header>Related Products</x-header>
                 <div>
+                    {{-- products in the same category should show here or brand --}}
+                    <div>
+                        {{-- <div class="grid grid-cols-4 gap-4 py-14 px-12">
+                            @foreach ($products as $product)
+                                <x-product-card :$product />
+                            @endforeach
+                        </div> --}}
+                    </div>
                     <div class="grid grid-cols-4 gap-4 py-14 px-12">
                         @foreach ($products as $product)
                             <x-product-card :$product />

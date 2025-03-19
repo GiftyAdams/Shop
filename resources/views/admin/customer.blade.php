@@ -69,46 +69,37 @@
 
             <!-- Main Content Area -->
             <main class="flex-1 p-6 bg-white">
-                <h2 class="text-xl font-semibold mb-4">Orders</h2>
+                <h2 class="text-xl font-semibold mb-4">Customers</h2>
                 
                         {{-- Table --}}
                         <div class="overflow-x-auto">
                             <table class="min-w-full border-collapse border border-gray-300">
                                 <thead>
                                     <tr class="bg-gray-200">
-                                        <th class="border border-gray-300 p-2">Customer Name</th>
-                                        <th class="border border-gray-300 p-2">Order Number</th>
-                                        <th class="border border-gray-300 p-2">Total Price</th>
-                                        <th class="border border-gray-300 p-2">Order Date</th>
-                                        <th class="border border-gray-300 p-2">Status</th>
+                                        <th class="border border-gray-300 p-2">Id</th>
+                                        <th class="border border-gray-300 p-2">First Name</th>
+                                        <th class="border border-gray-300 p-2">Email</th>
+                                        <th class="border border-gray-300 p-2">Joined</th>
+                                        <th class="border border-gray-300 p-2">Address</th>
+                                        <th class="border border-gray-300 p-2">Phone Number</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($orders as $order)
-                                        <tr class="text-center">
-                                            <td class="border border-gray-300 p-2">{{ $order->user->first_name}}</td>
+                                    @foreach ($users as $user)
+                                        <tr class="bg-white">
+                                            <td class="border border-gray-300 p-2">{{ $user->id }}</td>
+                                            <td class="border border-gray-300 p-2">{{ $user->first_name }}</td>
+                                            <td class="border border-gray-300 p-2">{{ $user->email }}</td>
+                                            <td class="border border-gray-300 p-2">{{ $user->created_at ? $user->created_at->format('M d, Y') : 'N/A' }}</td>
+                                            <td class="border border-gray-300 p-2">{{ $user->address ?? 'Null' }}</td>
                                             <td class="border border-gray-300 p-2">
-                                                <a href="{{ route('admin.orders.show', $order->id) }}" class="text-blue-500 hover:underline">
-                                                    {{ $order->order_number ?? 'N/A' }}
-                                                </a>
-                                            </td>
-                                            </td>
-                                            <td class="border border-gray-300 p-2">{{ $order->total_price ?? 'N/A' }}
-                                            </td>
-                                            <td class="border border-gray-300 p-2">
-                                                {{ $order->created_at ? $order->created_at->format('Y-m-d') : 'N/A' }}
-                                            </td>
-                                            <td class="border border-gray-300 p-2">
-                                                <span
-                                                    class="px-2 py-1 rounded text-white 
-                                        {{ $order->status == 'pending' ? 'bg-yellow-500' : ($order->status == 'completed' ? 'bg-green-500' : 'bg-red-500') }}">
-                                                    {{ ucfirst($order->status) }}
-                                                </span>
+                                           {{ $user->phone_number ?? 'Null'}}
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            
 
                         </div>
 
