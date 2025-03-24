@@ -10,7 +10,7 @@
             <ul class="mt-2 border-t pt-2">
                 @foreach ($order->orderItems as $item)
                     <li class="flex items-center py-2 border-b">
-                        <img src="{{ $item->product->image ?? '/placeholder.jpg' }}" class="w-16 h-16 object-cover rounded-md" alt="{{ $item->product->name }}">
+                        <img src="{{ asset($item->product->images[0]->image_url) ?? '/placeholder.jpg' }}" class="w-16 h-16 object-cover rounded-md" alt="{{ $item->product->name }}">
                         <div class="ml-4">
                             <p class="font-medium">{{ $item->product->name }}</p>
                             <p class="text-sm text-gray-600">Quantity: {{ $item->quantity }}</p>

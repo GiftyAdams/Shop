@@ -1,7 +1,7 @@
 <x-auth-layout>
     <main class="px-20 py-8">
         @if ($cartItems->isEmpty())
-            <p class="text-center text-gray-500">No items in your wishlist.</p>
+            <p class="text-center text-gray-500">No items in your cart.</p>
         @endif
         @php
             $cartTotal = 0;

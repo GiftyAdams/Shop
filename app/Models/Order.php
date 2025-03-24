@@ -31,4 +31,8 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function addresses()
+{
+    return $this->hasMany(Address::class);
+}
 }

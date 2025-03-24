@@ -6,7 +6,7 @@
                     <div>
                         <!-- Main Product Image -->
                         <img id="mainProductImage" src="{{ asset($product->images[0]->image_url) }}"
-                            class="w-full h-[450px] object-cover rounded-lg" />
+                            class="w-80 h-80 object-cover rounded-lg" />
 
                         <!-- Other Product Images -->
                         <div class="flex space-x-2 mt-4">
@@ -33,8 +33,9 @@
                     <p class="text-xs mb-2">{{ $product->name }}</p>
                     <div class="center between font-bold text-xl">
                         <h1 class="text-3xl"> {{ $product->name }}</h1>
+                       
                         {{-- if item is in stock then show this if not show out of stock --}}
-                        @if ($product->quantity > 0)
+                        @if ($product->stock > 0)
                             <p class="bg-green-500 text-white text-xs px-2 py- rounded">In Stock</p>
                         @else
                             <p class="bg-red-500 text-white text-xs px-2 py- rounded">Out of Stock</p>

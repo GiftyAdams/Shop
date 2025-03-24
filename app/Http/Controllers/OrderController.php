@@ -7,8 +7,10 @@ use App\Models\Address;
 use App\Models\CartItem;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
+use App\Mail\OrderConfirmed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -91,6 +93,9 @@ class OrderController extends Controller
 
         // Delete Cart Items
         CartItem::where('user_id', $user->id)->delete();
+
+        // Send confirmation email
+        Mail::to($order->user->email)->send(new OrderConfirmed($order));
 
         // Redirect to Orders Page
         return redirect()->route('profile.orders')->with('success', 'Order placed successfully!');

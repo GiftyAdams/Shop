@@ -65,41 +65,50 @@
 
             <!-- Main Content Area -->
             <main class="flex-1 p-6 bg-white">
-                <div class="container">
-                    <h2 class="text-xl font-semibold mb-4">Genders</h2>
-            
-                    <!-- List of Categories -->
-                    <ul>
-                        @foreach($genders as $gender)
-                            <li class="flex justify-between items-center border-b py-2">
-                                <span>{{ $gender->name }}</span>
-                                <div>
-                                    <a href="{{ route('genders.edit', $gender->id) }}" class="text-blue-500">Edit</a>
-            
-                                    <form action="{{ route('genders.destroy', $gender->id) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-500">Delete</button>
-                                    </form>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                <h2 class="text-xl font-semibold mb-4">Reviews</h2>
+                
+                {{-- Table --}}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse border border-gray-300">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="border border-gray-300 p-2">Customer Name</th>
+                                <th class="border border-gray-300 p-2">Email</th>
+                                <th class="border border-gray-300 p-2">Product Name</th>
+                                <th class="border border-gray-300 p-2">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reviews as $review)
+                                <tr class="text-center">
+                                    <td class="border border-gray-300 p-2">{{ $review->name}}</td>
+                                    <td class="border border-gray-300 p-2">{{ $review->email}}</td>
+                                    <td class="border border-gray-300 p-2">{{ $review->product?->name ?? 'n/a' }}</td>
+                                    <td class="border border-gray-300 p-2">
+                                        {{ $review->created_at ? $review->created_at->format('Y-m-d') : 'N/A' }}
+                                    </td>
+                                    <td class="border border-gray-300 p-2">
+                                        <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this review?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-700">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            
-                <!-- Create Category Form -->
-                <div class="container mt-6 ">
-                    <h1 class="text-lg font-semibold">Create Brand</h1>
-            
-                    <form action="{{ route('genders.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="name">Gender Name</label>
-                            <input type="text" name="name" class="form-control border p-2 outline-none rounded" required>
-                        </div>
-                        <button type="submit" class="border border-black rounded text-black px-4 py-2">Save</button>
-                    </form>
-                </div>
+
+                {{-- Pagination
+                <div class="mt-4">
+                    {{ $products->links() }}
+                </div> --}}
+            </div>
+
+        </div>
             </main>
         </div>
     </div>

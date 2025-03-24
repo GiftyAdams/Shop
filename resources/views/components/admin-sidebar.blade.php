@@ -65,6 +65,14 @@
         </li>
 
         <li>
+            <a href="/admin/reviews" 
+               class="{{ request()->is('admin/reviews') ? 'font-extrabold' : 'font-medium' }} 
+                      text-black rounded-md px-3 py-2 text-sm hover:bg-gray-200">
+                Reviews
+            </a>
+        </li>
+
+        <li>
             <form action="/logout" method="POST">
                 @csrf
                 <button type="submit"

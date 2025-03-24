@@ -123,4 +123,8 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/admin/products/store', [ProductController::class, 'store'])->name('products.store');
+
+    Route::get('/admin/reviews', [CustomerReviewController::class, 'show'])->name('admin.reviews');
+    Route::delete('/reviews/{id}', [CustomerReviewController::class, 'destroy'])->name('reviews.destroy');
+
 });

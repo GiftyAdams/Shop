@@ -2,24 +2,24 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 
-class SignedUser extends Mailable
+class OrderConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct(public User $user)
+ public $order;
+ public $user;
+
+    public function __construct($order)
     {
-        //
+        $this->order = $order;
+        $this->user = $order->user;
     }
 
     /**
@@ -28,7 +28,7 @@ class SignedUser extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'SHOPNOW Account Verification',
+            subject: 'SHOPNOW Order Confirmed',
         );
     }
 
@@ -38,7 +38,12 @@ class SignedUser extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.signed-user',
+            view: 'mail.order-confirm',
+            with: [
+                'order' => $this->order,
+                'user' => $this->user
+            ]
+
         );
     }
 

@@ -1,21 +1,4 @@
 <x-auth-layout>
-    @if (session('success'))
-        <div id="success-message"
-            class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 text-center rounded relative"
-            role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const successMessage = document.getElementById("success-message");
-            if (successMessage) {
-                setTimeout(function() {
-                    successMessage.style.display = "none";
-                }, 5000);
-            }
-        })
-    </script>
     <main class="px-20">
         <div class="py-5">
             <x-header> My Orders</x-header>
@@ -26,7 +9,7 @@
             </div>
 
             <div class="col-span-3">
-                <div class="grid grid-cols-3 gap-x-4 gap-y-5 py-4 ">
+                <div class="grid grid-cols-2 gap-4 space-x-4 ">
                     @foreach ($orders as $order)
                         <div class="bg-white shadow-md rounded-lg p-6 mb-6 border w-80">
                             <!-- Order Header -->
@@ -51,7 +34,8 @@
                                 <ul class="mt-2">
                                     @foreach ($order->orderItems as $item)
                                         <li class="flex items-center border-b py-2">
-                                            <img src="{{ $item->product->image }}" alt="{{ $item->product->name }}"
+                                            {{-- @dd($item->product->images[0]) --}}
+                                            <img src="{{ asset($item->product->images[0]->image_url) }}" alt="{{ $item->product->name }}"
                                                 class="w-16 h-16 rounded-md object-cover">
                                             <div class="ml-4">
                                                 <p class="font-medium text-gray-800">{{ $item->product->name }}</p>

@@ -183,7 +183,7 @@
 
                                 <div>
                                     <x-form-input name="stock" id="stock" type="stock"
-                                        value="{{ old('stock') }}" required />
+                                        value="{{ old('stock') }}" required />  
 
                                     <x-form-error name="stock" />
                                 </div>
@@ -193,7 +193,7 @@
 
                             <x-form-field>
                                 <x-form-label for="stock">Product Images</x-form-label>
-                                <input type="file" name="images[]" multiple class="w-full p-2 border rounded" required>
+                                <input type="file" name="images[]" accept=".jpeg,.png,.jpg,.gif,.svg" multiple class="w-full p-2 border rounded" required>
                             </x-form-field>
 
                             <div class="flex justify-end">

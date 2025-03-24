@@ -43,11 +43,11 @@ class ProfileController extends Controller
     public function address()
     {
         $user = Auth::user();
-    
-        // Fetch the latest order with its address
-        $order = Order::with('address')->where('user_id', $user->id)->latest()->first();
-    
-        return view('profile.address', compact('order'));
+
+        //get address from addresses table
+        $address = $user->addresses()->latest()->first();
+
+        return view('profile.address', compact('address'));
     }
     
 }
