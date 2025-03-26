@@ -73,6 +73,14 @@
         </li>
 
         <li>
+            <a href="/admin/notifications" 
+               class="{{ request()->is('admin/notifications') ? 'font-extrabold' : 'font-medium' }} 
+                      text-black rounded-md px-3 py-2 text-sm hover:bg-gray-200">
+                Notifications
+            </a>
+        </li>
+
+        <li>
             <form action="/logout" method="POST">
                 @csrf
                 <button type="submit"

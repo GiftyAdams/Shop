@@ -127,4 +127,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/reviews', [CustomerReviewController::class, 'show'])->name('admin.reviews');
     Route::delete('/reviews/{id}', [CustomerReviewController::class, 'destroy'])->name('reviews.destroy');
 
+    Route::get('/admin/notifactions', [AdminController::class, 'notifactions'])->name('admin.notifactions');
+
 });

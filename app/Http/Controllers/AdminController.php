@@ -65,4 +65,7 @@ class AdminController extends Controller
             'genders' => Gender::all(),
         ]);
     }
+    public function notifications() {
+        return view('admin.notifications');
+    }
 }
