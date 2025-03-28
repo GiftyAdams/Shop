@@ -59,13 +59,13 @@
             // Check if the product is already in the cart
             $isInCart = \App\Models\CartItem::where('user_id', auth()->id())
                 ->where('product_id', $product['id'])
-                ->exists();
+                ->exists() || $product['stock'] == 0;
         @endphp
-
+      
         <button type="submit"
             class="z-50 absolute text-xs top-48 rounded-xl left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
             {{ $isInCart ? 'disabled' : '' }}>
-            {{ $isInCart ? 'Added to Cart' : 'Add to Cart' }}
+            {{ $product['stock'] == 0 ? 'Out of Stock' : ($isInCart ? 'Added to Cart' : 'Add to Cart') }}
         </button>
     </form>
 

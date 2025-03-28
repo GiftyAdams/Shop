@@ -23,6 +23,7 @@
                         Total: GHC
                         <span class="cart-total">{{ $cartTotal }}</span>
                     </h2>
+                    
                     <form action="{{ route('cart.checkout') }}" method="POST">
                         @csrf
                         <x-form-button class="mt-4">

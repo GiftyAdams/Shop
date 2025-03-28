@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Address;
+use App\Models\Product;
+use App\Mail\OutOfStock;
 use App\Models\CartItem;
+use App\Mail\NeedRestock;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
 use App\Mail\OrderConfirmed;
@@ -27,20 +30,6 @@ class OrderController extends Controller
         }
         return view('profile.show', compact('order'));
     }
-    public function cancel(Order $order)
-    {
-        if ($order->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action');
-        }
-
-        if ($order->status !== 'Processing') {
-            return redirect()->back()->with('error', 'Order cannot be canceled at this stage.');
-        }
-
-        $order->update(['status' => 'Canceled']);
-
-        return redirect()->route('orders.index')->with('success', 'Order canceled successfully.');
-    }
     public function placeOrder(Request $request)
     {
 
@@ -58,15 +47,7 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Please add an address before placing an order.');
         }
 
-        //taking address input
-        // $request->validate([
-        //     'address' => 'required',
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'phone_number' => 'required',
-        // ]);
-
-        // Calculate total price
+        // Calculating total price
         $totalPrice = $cartItems->sum(fn($item) => $item->product->price * $item->quantity);
 
         // Create Order
@@ -77,12 +58,36 @@ class OrderController extends Controller
             'status' => 'pending'
         ]);
 
-        // Link the address to the order
+        //linking the address to the order
         $address->order_id = $order->id;
         $address->save();
 
         // Move Cart Items to Order Items
         foreach ($cartItems as $item) {
+
+            // dump($item->quantity);
+            $product = $item->product;
+            // dd($product->stock);
+            if ($product->stock < $item->quantity) {
+                return redirect()->back()->with('error', "Not enough stock for {$product->name}.");
+            }
+
+            //Reduce stock
+            $product->stock -= $item->quantity;
+            $product->save();
+
+            // send out of stock email if stock = 0
+            if ($product->stock == 0) {
+                Mail::to('giftyadams577@gmail.com')->send(new OutOfStock($product));
+        
+            }
+
+            //send restock email if stock <= 5
+            elseif ($product->stock <= 5) {
+                Mail::to('giftyadams577@gmail.com')->send(new NeedRestock($product));
+            }
+
+
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $item->product_id,
@@ -115,10 +120,36 @@ class OrderController extends Controller
 
         return redirect()->route('admin.orders.show', $order->id)->with('success', 'Order status updated successfully.');
     }
+
+
+    public function cancel(Order $order)
+    {
+        if ($order->status === 'pending') {
+            foreach ($order->orderItems as $item) {
+                $product = Product::find($item->product_id);
+                if ($product) {
+                    $product->stock += $item->quantity; // Restore stock
+                    $product->save();
+                }
+            }
+
+            $order->status = 'cancelled';
+            $order->save();
+
+            return redirect()->back()->with('success', 'Order has been cancelled.');
+        }
+
+        return redirect()->back()->with('error', 'Only pending orders can be cancelled.');
+    }
+
     public function destroy(Order $order)
     {
-        $order->delete(); // Delete the order
+        if ($order->status !== 'cancelled') {
+            return redirect()->back()->with('error', 'Only cancelled orders can be deleted.');
+        }
 
-        return redirect()->route('admin.dashboard')->with('success', 'Order deleted successfully.');
+        $order->delete();
+
+        return redirect()->back()->with('success', 'Order deleted successfully.');
     }
 }

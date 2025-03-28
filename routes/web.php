@@ -70,13 +70,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile/orders', [OrderController::class, 'index']);
     Route::post('/profile/orders', [OrderController::class, 'placeOrder'])->name('profile.orders');
     Route::get('/profile/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-    Route::post('/profile/orders/{order}', [OrderController::class, 'cancel'])->name('profile.order.cancel');
+    Route::post('/profile/orders/{order}', [OrderController::class, 'cancel'])->name('order.cancel');
     Route::get('/wishlist', [WishlistController::class, 'index']);
     Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
     Route::post('/wishlist/remove', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.remove');
     Route::get('/wishlist/login', [WishlistController::class, 'login'])->name('wishlist.login');
 
     Route::post('/orders/place', [OrderController::class, 'placeOrder'])->name('orders.place');
+
+    Route::patch('/orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
 });
 
 
@@ -86,8 +89,6 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [SessionController::class, 'create'])->name('login');
     Route::post('/login', [SessionController::class, 'store']);
-
-
 });
 
 
@@ -126,7 +127,4 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::get('/admin/reviews', [CustomerReviewController::class, 'show'])->name('admin.reviews');
     Route::delete('/reviews/{id}', [CustomerReviewController::class, 'destroy'])->name('reviews.destroy');
-
-    Route::get('/admin/notifactions', [AdminController::class, 'notifactions'])->name('admin.notifactions');
-
 });

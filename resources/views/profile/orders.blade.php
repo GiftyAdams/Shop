@@ -9,9 +9,12 @@
             </div>
 
             <div class="col-span-3">
+                @if ($orders->isEmpty())
+                    <p class="text-center text-gray-500">No orders found.</p>
+                @endif
                 <div class="grid grid-cols-2 gap-4 space-x-4 ">
                     @foreach ($orders as $order)
-                        <div class="bg-white shadow-md rounded-lg p-6 mb-6 border w-80">
+                        <div class="bg-white shadow-md rounded-lg p-6 mb-6 border">
                             <!-- Order Header -->
                             <div class="flex justify-between items-center border-b pb-3">
                                 <div>
@@ -20,7 +23,7 @@
                                     <p class="text-sm text-gray-600">Placed on
                                         {{ $order->created_at->format('M d, Y') }}
                                     </p>
-                                    {{-- <p>Address {{ $address->address }} </p> --}}
+                                    <p>Address: {{ $order->address->address ?? 'N/A' }} </p>
                                     <p class="text-sm font-medium text-blue-600">Status: {{ ucfirst($order->status) }}
                                     </p>
                                 </div>
@@ -35,7 +38,8 @@
                                     @foreach ($order->orderItems as $item)
                                         <li class="flex items-center border-b py-2">
                                             {{-- @dd($item->product->images[0]) --}}
-                                            <img src="{{ asset($item->product->images[0]->image_url) }}" alt="{{ $item->product->name }}"
+                                            <img src="{{ asset($item->product->images[0]->image_url) }}"
+                                                alt="{{ $item->product->name }}"
                                                 class="w-16 h-16 rounded-md object-cover">
                                             <div class="ml-4">
                                                 <p class="font-medium text-gray-800">{{ $item->product->name }}</p>
@@ -56,14 +60,24 @@
                                 </a>
 
                                 <!-- Cancel Order Button -->
-                                @if ($order->status === 'Processing')
+                                @if ($order->status === 'pending')
+                                    <!-- Cancel Order Button -->
                                     <form action="{{ route('orders.cancel', $order->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                                        style="display:inline;">
                                         @csrf
+                                        @method('PATCH')
                                         <button type="submit"
-                                            class="bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600">
-                                            Cancel Order
-                                        </button>
+                                            class="bg-red-500 text-white px-4 py-2 rounded">Cancel</button>
+                                    </form>
+                                @endif
+                                @if ($order->status === 'cancelled')
+                                    <!-- Delete Order Button -->
+                                    <form action="{{ route('orders.destroy', $order->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-gray-500 text-white px-4 py-2 rounded">Delete</button>
                                     </form>
                                 @endif
                             </div>

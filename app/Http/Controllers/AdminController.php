@@ -9,6 +9,7 @@ use App\Models\Gender;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -38,7 +39,7 @@ class AdminController extends Controller
 
     public function show()
     {
-        $products = Product::latest()->paginate(10);
+        $products = Product::oldest()->paginate(10);
         $orders = Order::where('user_id', Auth::id())->with('orderItems.product')->get();
         return view('admin.show', compact('products', 'orders'));
     }
@@ -66,6 +67,7 @@ class AdminController extends Controller
         ]);
     }
     public function notifications() {
-        return view('admin.notifications');
+        $products = Product::oldest()->get();
+        return view('admin.notifications', compact('products'));
     }
 }
