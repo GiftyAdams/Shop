@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Admin::class);
             $table->foreignIdFOr(Category::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFOr(Brand::class);
+            $table->foreignIdFOr(Brand::class)->constrained()->cascadeOnDelete();
             $table ->string('name');
             $table->string('description');
             $table->foreignIdFOr(Gender::class);

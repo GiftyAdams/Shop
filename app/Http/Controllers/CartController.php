@@ -93,9 +93,14 @@ class CartController extends Controller
         $cartTotal = $this->cartTotal();
         return view('cart.index', compact('cartItems', 'cartTotal'));
     }
-    public function cartTotal()
+    public function cartTotal($cartItems)
     {
-        $cartItems = CartItem::where('user_id', auth()->id())->get();
+
+            $cartItems = CartItem::where('user_id', auth()->id())
+                ->whereHas('product', function ($query) {
+                    $query->where('stock', '>', 0);
+                })
+                ->get();
         $total = 0;
         foreach ($cartItems as $cartItem) {
             $total += $cartItem->product->price * $cartItem->quantity;
@@ -104,9 +109,14 @@ class CartController extends Controller
     }
     public function checkout()
     {
-        $cartItems = CartItem::where('user_id', auth()->id())->get();
-        $cartTotal = $this->cartTotal();
-        return view('cart.checkout', compact('cartItems', 'cartTotal'));
+        // $cartItems = CartItem::where('user_id', auth()->id())
+        //     ->whereHas('product', function ($query) {
+        //         $query->where('stock', '>', 0); 
+        //     })
+        //     ->get();
+
+        // $cartTotal = $this->cartTotal($cartItems);
+        return view('cart.checkout');
     }
 
     public function addAddress(Request $request)
@@ -137,10 +147,18 @@ class CartController extends Controller
     }
     public function showReviewPage(Request $request)
     {
+        $cartItems = CartItem::where('user_id', auth()->id())
+            ->whereHas('product', function ($query) {
+                $query->where('stock', '>', 0);
+            })
+            ->get();
+
+        $cartTotal = $this->cartTotal($cartItems);
+
         $paymentMethod = $request->get('payment');
-        $address = auth()->user()->addresses()->latest()->first(); 
-        $cartItems = CartItem::where('user_id', auth()->id())->get();
-        $cartTotal = $this->cartTotal();  
+        $address = auth()->user()->addresses()->latest()->first();
+        // $cartItems = CartItem::where('user_id', auth()->id())->get();
+        // $cartTotal = $this->cartTotal();
         return view('cart.review', compact('cartItems', 'cartTotal', 'address', 'paymentMethod'));
     }
 }

@@ -1,10 +1,10 @@
 @props([ 'quantity' => 1, 'loopindex' => 0, 'price', 'cart_item_id' ])
 
-<div class="flex items-center space-x-2 border border-black rounded-md">
+<div class="flex w-fit items-end border border-black rounded-md">
     <!-- Minus Button -->
     <button type="button" onclick="updateQuantity(this, -1, {{ $loopindex}}, {{ (float) $price }}, {{ $cart_item_id }} )" class="px-3 py-1 text-lg">−</button>
     <!-- Quantity Display -->
-    <input type="text" name="quantity" class="w-10 text-center py-1" value="{{ $quantity ?? 1 }}" min="1" readonly />
+    <input type="text" name="quantity" class="max-w-10 text-center py-1" value="{{ $quantity ?? 1 }}" min="1" readonly />
 
     <!-- Plus Button -->
     <button type="button" onclick="updateQuantity(this, 1, {{ $loopindex}}, {{ (float) $price }}, {{ $cart_item_id }} )" class="px-3 py-1 text-lg">+</button>

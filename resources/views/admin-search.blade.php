@@ -69,66 +69,66 @@
 
             <!-- Main Content Area -->
             <main class="flex-1 p-6 bg-white">
-                <h1 class="text-xl font-bold">All Products</h1>
-
-                <div>
+                <button class="center text-[12px]" onclick="window.history.back();">
+                    <x-svg.chevron-left /> Back
+                </button>
                     <div class="p-8">
-                        <div class="flex justify-end p-4">
-                            <a href="{{ route('products.create') }}">
-                                <x-form-button>Add Product</x-form-button>
-                        </div>
-                        </a>
-
 
                         {{-- Table --}}
                         <div class="overflow-x-auto">
-                            <table class="min-w-full border border-gray-200">
-                                <thead class="bg-gray-100">
-                                    <tr>
-                                        <th class="border px-4 py-2">Product Id</th>
-                                        <th class="border px-4 py-2">Image</th>
-                                        <th class="border px-4 py-2">ProductName</th>
-                                        <th class="border px-4 py-2">Category</th>
-                                        <th class="border px-4 py-2">Brand</th>
-                                        <th class="border px-4 py-2">Price</th>
-                                        <th class="border px-4 py-2">Stock</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($products as $product)
-                                        
-                                        <tr class="text-center">
-                                            <td class="border px-4 py-2">{{ $product->id }}</td>
-                                            <td class="border px-4 py-2">
-                                                <img src="{{ asset($product->images[0]->image_url) }}"
-                                                    alt="Product Image" class="w-16 h-16 object-cover">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a href="{{ route('admin.product.show', $product->id) }}"
-                                                    class="text-blue-500 hover:underline">
-                                                    {{ $product->name }}
-                                                </a>
-                                            </td>
-                                            <td class="border px-4 py-2"> {{ $product->category->name ?? '' }}
-                                            </td>
-                                            <td class="border px-4 py-2"> {{ $product->brand->name ?? '' }}
-                                            <td class="border px-4 py-2">${{ number_format($product->price, 2) }}</td>
-                                            <td class="border px-4 py-2">{{ $product->stock }}</td>
-
+                            @if ($products->count())
+                                @if ($query)
+                                    <h3 class="py-2">Showing results for: <strong>{{ $query }}</strong></h3>
+                                @endif
+                                <table class="min-w-full border border-gray-200">
+                                    <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="border px-4 py-2">Product Id</th>
+                                            <th class="border px-4 py-2">Image</th>
+                                            <th class="border px-4 py-2">ProductName</th>
+                                            <th class="border px-4 py-2">Category</th>
+                                            <th class="border px-4 py-2">Brand</th>
+                                            <th class="border px-4 py-2">Price</th>
+                                            <th class="border px-4 py-2">Stock</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($products as $product)
+                                            <tr class="text-center">
+                                                <td class="border px-4 py-2">{{ $product->id }}</td>
+                                                <td class="border px-4 py-2">
+                                                    <img src="{{ asset($product->images[0]->image_url) }}"
+                                                        alt="Product Image" class="w-16 h-16 object-cover">
+                                                </td>
+                                                <td class="border px-4 py-2">
+                                                    <a href="{{ route('admin.product.show', $product->id) }}"
+                                                        class="text-blue-500 hover:underline">
+                                                        {{ $product->name }}
+                                                    </a>
+                                                </td>
+                                                <td class="border px-4 py-2"> {{ $product->category->name ?? '' }}
+                                                </td>
+                                                <td class="border px-4 py-2"> {{ $product->brand->name ?? '' }}
+                                                <td class="border px-4 py-2">${{ number_format($product->price, 2) }}
+                                                </td>
+                                                <td class="border px-4 py-2">{{ $product->stock }}</td>
+
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                         </div>
 
                         {{-- Pagination --}}
                         <div class="mt-4">
                             {{ $products->links() }}
                         </div>
+                    @else
+                        <div class="text-xl text-red-500 py-6">
+                            Oops.. No results found for: <strong>{{ $query }}</strong>
+                        </div>
+                        @endif
                     </div>
-
-                </div>
-
             </main>
         </div>
     </div>

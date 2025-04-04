@@ -64,10 +64,7 @@ class OrderController extends Controller
 
         // Move Cart Items to Order Items
         foreach ($cartItems as $item) {
-
-            // dump($item->quantity);
             $product = $item->product;
-            // dd($product->stock);
             if ($product->stock < $item->quantity) {
                 return redirect()->back()->with('error', "Not enough stock for {$product->name}.");
             }

@@ -58,7 +58,7 @@
                 <li><a href="#"
                         class="text-white hover:text-black border border-transparent bg-blue-300 px-3 py-2 rounded text-xs">Admin</a>
                 </li>
-
+                {{-- <li><a href="#" class="text-gray-700 hover:text-black">Logout</a></li> --}}
             </ul>
         </nav>
 
@@ -69,69 +69,63 @@
 
             <!-- Main Content Area -->
             <main class="flex-1 p-6 bg-white">
-                <h1 class="text-xl font-bold">All Products</h1>
+                <h2 class="text-xl font-semibold mb-4">Product Details</h2>
 
-                <div>
-                    <div class="p-8">
-                        <div class="flex justify-end p-4">
-                            <a href="{{ route('products.create') }}">
-                                <x-form-button>Add Product</x-form-button>
-                        </div>
+
+                <div class="space-y-2">
+                    <div class="center">
+                        @foreach ($product->images as $image)
+                            <img src="{{ asset('storage/' . $image->image_url) }}" alt="Image"
+                                class="w-28 h-28 rounded-md">
+                        @endforeach
+                    </div>
+                    <div>
+                        <strong> Product Name </strong> : {{ $product->name }}
+                    </div>
+                    <div>
+                        <strong> Product Price </strong>: {{ $product->price }}
+                    </div>
+                    <div>
+                        <strong> Product Stock</strong> : {{ $product->stock }}
+                    </div>
+                    <div>
+                        <strong> Product Size</strong> : {{ $product->size ?? 'N/A' }}
+                    </div>
+                    <div>
+                        <strong> Product Brand</strong> : {{ $product->brand->name ?? 'N/A' }}
+                    </div>
+                    <div>
+                        <strong> Product Category </strong>: {{ $product->category->name ?? 'N/A' }}
+                    </div>
+                    <div>
+                        <strong> Product Gender</strong> : {{ $product->gender->name ?? 'N/A' }}
+                    </div>
+                    <div>
+                        <strong> Product Description </strong> : {{ $product->description }}
+                    </div>
+
+
+                    <div class="mb-4 p-2">
+                        <p><strong>Created At:</strong> {{ $product->created_at->format('M d, Y') }}</p>
+                        <p><strong>Updated At:</strong> {{ $product->updated_at->format('M d, Y') }}</p>
+                    </div>
+                </div>
+                <div class="center space-x-4">
+                    <div>
+                        <button><a href="{{ route('admin.products.index') }}" class="bg-green-500 text-white text-sm px-4 py-2 rounded hover:bg-green-600">Back To
+                                Products</a></button>
+                    </div>
+                    <div>
+                        <!-- Submit Button -->
+                        <a href="{{ route('products.edit', $product->id) }}">
+                            <button type="submit"
+                                class="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600">
+                                Update Product
+                            </button>
                         </a>
-
-
-                        {{-- Table --}}
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full border border-gray-200">
-                                <thead class="bg-gray-100">
-                                    <tr>
-                                        <th class="border px-4 py-2">Product Id</th>
-                                        <th class="border px-4 py-2">Image</th>
-                                        <th class="border px-4 py-2">ProductName</th>
-                                        <th class="border px-4 py-2">Category</th>
-                                        <th class="border px-4 py-2">Brand</th>
-                                        <th class="border px-4 py-2">Price</th>
-                                        <th class="border px-4 py-2">Stock</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($products as $product)
-                                        
-                                        <tr class="text-center">
-                                            <td class="border px-4 py-2">{{ $product->id }}</td>
-                                            <td class="border px-4 py-2">
-                                                <img src="{{ asset($product->images[0]->image_url) }}"
-                                                    alt="Product Image" class="w-16 h-16 object-cover">
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a href="{{ route('admin.product.show', $product->id) }}"
-                                                    class="text-blue-500 hover:underline">
-                                                    {{ $product->name }}
-                                                </a>
-                                            </td>
-                                            <td class="border px-4 py-2"> {{ $product->category->name ?? '' }}
-                                            </td>
-                                            <td class="border px-4 py-2"> {{ $product->brand->name ?? '' }}
-                                            <td class="border px-4 py-2">${{ number_format($product->price, 2) }}</td>
-                                            <td class="border px-4 py-2">{{ $product->stock }}</td>
-
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {{-- Pagination --}}
-                        <div class="mt-4">
-                            {{ $products->links() }}
-                        </div>
                     </div>
 
                 </div>
-
             </main>
         </div>
-    </div>
-
-
 </x-layout>

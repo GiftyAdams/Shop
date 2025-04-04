@@ -44,25 +44,33 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    protected static function booted()
+    public function brand()
     {
-        static::updated(function ($product) {
-            if ($product->isDirty('stock')) {
-                $message = null;
-
-                if ($product->stock == 0) {
-                    $message = "{$product->name} is out of stock!";
-                } elseif ($product->stock < 5) {
-                    $message = "{$product->name} stock is low! Consider restocking.";
-                }
-
-                if ($message) {
-                    DB::table('notifications')->insert([
-                        'message' => $message,
-                        'created_at' => now(),
-                    ]);
-                }
-            }
-        });
+        return $this->belongsTo(Brand::class);
     }
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
+    }
+    // protected static function booted()
+    // {
+    //     static::updated(function ($product) {
+    //         if ($product->isDirty('stock')) {
+    //             $message = null;
+
+    //             if ($product->stock == 0) {
+    //                 $message = "{$product->name} is out of stock!";
+    //             } elseif ($product->stock < 5) {
+    //                 $message = "{$product->name} stock is low! Consider restocking.";
+    //             }
+
+    //             if ($message) {
+    //                 DB::table('notifications')->insert([
+    //                     'message' => $message,
+    //                     'created_at' => now(),
+    //                 ]);
+    //             }
+    //         }
+    //     });
+    // }
 }

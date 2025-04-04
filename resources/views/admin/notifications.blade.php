@@ -67,23 +67,9 @@
             <main class="flex-1 p-6 bg-white">
                 <h2 class="text-xl font-semibold mb-4">Notifications</h2>
 
-                <div class="bg-white p-4 rounded shadow">
+                <div class="space-y-4">
                     @foreach ($products as $product)
-                    @if ($product->stock == 0)
-                    <p class="text-red-600">The product <strong>{{ $product->name }}</strong> is currently out of stock.</p>
-                @elseif ($product->stock <= 5)
-                    <div class="flex justify-between">
-                        <div>
-                            <p class="text-red-600">The product <strong>{{ $product->name }}</strong> is running low on stock.</p>
-                        </div>
-                        <div>
-                         <button>
-                            Restock
-                         </button>
-                        </div>
-                    </div>
-                @endif
-                
+                     <x-notification-card :product="$product" />
                     @endforeach
                 </div>
             </main>

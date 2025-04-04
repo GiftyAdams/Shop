@@ -13,9 +13,12 @@
         </div>
         @php
             foreach ($cartItems as $cartItem) {
-                $cartTotal += $cartItem->product->price * $cartItem->quantity;
+                if ($cartItem->product->stock > 0) {
+                    $cartTotal += $cartItem->product->price * $cartItem->quantity;
+                }
             }
         @endphp
+
         @if ($cartItems->isNotEmpty())
             <div class="flex justify-end">
                 <div>
@@ -23,7 +26,7 @@
                         Total: GHC
                         <span class="cart-total">{{ $cartTotal }}</span>
                     </h2>
-                    
+
                     <form action="{{ route('cart.checkout') }}" method="POST">
                         @csrf
                         <x-form-button class="mt-4">

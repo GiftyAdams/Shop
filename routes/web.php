@@ -127,4 +127,11 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::get('/admin/reviews', [CustomerReviewController::class, 'show'])->name('admin.reviews');
     Route::delete('/reviews/{id}', [CustomerReviewController::class, 'destroy'])->name('reviews.destroy');
+
+    Route::get('/admin/notifications', [AdminController::class, 'notifications'])->name('admin.notifications');
+
+    Route::get('/admin/products/{id}', [AdminController::class, 'showProduct'])->name('admin.product.show');
+    Route::get('/admin/products/{id}/edit', [AdminController::class, 'edit'])->name('products.edit');
+    Route::put('/admin/products/{product}', [AdminController::class, 'update'])->name('products.update');
+    Route::get('/search', [AdminController::class, 'adminSearch'])->name('admin.search');
 });

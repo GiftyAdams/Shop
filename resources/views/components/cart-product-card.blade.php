@@ -1,11 +1,11 @@
 @props(['cartitem', 'loopindex' => 0])
 
-<div class="rounded shadow border border-transparent relative group p-4 ">
+<div class="rounded shadow border border-transparent relative group p-4">
     <div class="flex justify-between">
         <div class="flex space-x-2">
             <div onclick="window.location.href = '{{ route('detail', ['id' => $cartitem->product['id']]) }}'">
                 {{-- @dd($cartitem->images[0]->image_url) --}}
-                <x-product-image :imageurl="asset($cartitem->product->images[0]->image_url)"  alt="Image" class="w-32 h-32 rounded-md" />
+                <x-product-image :imageurl="asset($cartitem->product->images[0]->image_url)" alt="Image" class="w-28 h-28 rounded-md" />
             </div>
             <div class="space-y-8">
                 <div>
@@ -27,21 +27,34 @@
             </div>
         </div>
 
+
+
         <div class="space-y-16 ml-6">
             <div>
                 <form action=""></form>
                 <x-quantity-check :quantity="$cartitem['quantity']" :loopindex="$loopindex" :price="$cartitem->product['price']" :cart_item_id="$cartitem['id']" />
             </div>
-
-            <div class="pl-16">
-                <form action="{{ route('cart.remove') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $cartitem->product['id'] }}">
-                    <button type="submit">
-                        <x-svg.trash />
-                    </button>
-                </form>
+            <div class="flex items-center justify-end gap-4">
+                <div class="text-sm">
+                    {{-- if item is in stock then show this if not show out of stock --}}
+                    @if ($cartitem->product->stock > 0)
+                        <p class="bg-green-500 text-white text-xs px-2 rounded">In Stock</p>
+                    @else
+                        <p class="bg-red-500 text-white text-xs px-2 rounded">Out of Stock</p>
+                    @endif
+                </div>
+                <div>
+                    <form action="{{ route('cart.remove') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $cartitem->product['id'] }}">
+                        <button type="submit">
+                            <x-svg.trash />
+                        </button>
+                    </form>
+                </div>
             </div>
+
         </div>
+
     </div>
 </div>

@@ -45,7 +45,7 @@
 
                             <div>
                                 <x-form-input class="py-3 editable" name="phone_number" placeholder="eg. 054 123 456"
-                                    id="phone_number" value="{{ Auth::user()->phone_number }}" />
+                                    id="phone_number" value="{{ Auth::user()->phone_number ?? old('phone_number') }}" />
 
                                 <x-form-error name="phone_number" />
                             </div>
@@ -56,7 +56,7 @@
 
                             <div>
                                 <x-form-input class="py-3 editable" name="address" id="address" placeholder="Address"
-                                    value="{{ Auth::user()->address }}" />
+                                    value="{{ Auth::user()->address ?? old('address') }}" />
 
                                 <x-form-error name="address" />
                             </div>
